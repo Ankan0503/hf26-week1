@@ -1,0 +1,10 @@
+{
+  "name": "Kiska Kachra",
+  "short_name": "Kiska Kachra",
+  "description": "Pick up litter, snap it, count whose brand it is. On-device AI.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f2",
+  "theme_color": "#1f6f43",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

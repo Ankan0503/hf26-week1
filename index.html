@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kiska Kachra</title>
+<meta name="description" content="Pick up litter, snap it, and an AI running in your phone's browser tells you whose brand it is. Your walk becomes a brand audit.">
+<meta name="theme-color" content="#1f6f43">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Kiska Kachra <span class="sub">किसका कचरा?</span></h1>
+  <p class="tag">Whose trash is this? Pick it up, snap it, count the brands.</p>
+</header>
+
+<main>
+  <section id="model-card" class="card">
+    <div id="model-status">Loading the AI model (about 90&nbsp;MB, one time only; after that it works offline)…</div>
+    <div class="bar"><div id="model-bar"></div></div>
+  </section>
+
+  <section class="card">
+    <label id="snap" class="big-btn disabled" aria-disabled="true">
+      📷 Snap a piece of litter
+      <input id="photo" type="file" accept="image/*" capture="environment" disabled hidden>
+    </label>
+    <p class="hint">Hold the brand/logo towards the camera. Pick it up first, then snap it in your gloved hand.</p>
+  </section>
+
+  <section id="result" class="card" hidden>
+    <img id="preview" alt="Your photo">
+    <div id="thinking">Looking at it…</div>
+    <div id="answer" hidden>
+      <h2>Whose is it?</h2>
+      <div id="brand-chips" class="chips"></div>
+      <input id="brand-other" type="text" placeholder="Not listed? Type the brand" autocomplete="off">
+      <h2>What is it?</h2>
+      <div id="item-chips" class="chips"></div>
+      <button id="log-btn" class="big-btn">✅ Log it</button>
+      <button id="skip-btn" class="link-btn">Discard this photo</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Today's walk: <span id="total">0</span> pieces</h2>
+    <ol id="board" class="board"></ol>
+    <p id="empty" class="hint">Nothing logged yet. Go outside! 🌳</p>
+    <div class="row">
+      <button id="share-btn" class="btn">📣 Share the report</button>
+      <button id="csv-btn" class="btn">⬇️ CSV</button>
+      <button id="reset-btn" class="btn danger">New walk</button>
+    </div>
+    <details>
+      <summary>All entries</summary>
+      <ul id="log" class="log"></ul>
+    </details>
+  </section>
+
+  <footer>
+    <p>The AI (OpenAI CLIP, via Transformers.js) runs entirely on your phone. Photos never leave your device. Only the counts are saved, and only in this browser.</p>
+    <p><a href="https://github.com/Ankan0503/hf26-week1">Source (MIT)</a> · Hacktoberfest 2026 · Touch Grass</p>
+  </footer>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
