@@ -172,10 +172,13 @@ async function demo(perImage) {
   if (right.length < 2) throw new Error('not enough correctly recognised photos for a demo');
 
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'kk-'));
-  const viewport = { width: 390, height: 844 };
-  const videoSize = { width: viewport.width * 2, height: viewport.height * 2 }; // record at device-pixel resolution
+  const phone = { width: 390, height: 844 };
+  // Playwright records at CSS-pixel size (deviceScaleFactor doesn't help), so record a 2x window
+  // and zoom the page 2x: the layout is exactly a 390x844 phone, rendered sharp at 780x1688.
+  const ZOOM = 2;
+  const video = { width: phone.width * ZOOM, height: phone.height * ZOOM };
   // Warm-up run (not recorded): the one-time model download.
-  let ctx = await chromium.launchPersistentContext(profile, { viewport });
+  let ctx = await chromium.launchPersistentContext(profile, { viewport: phone });
   let page = ctx.pages()[0] || await ctx.newPage();
   await page.goto(base + '/');
   await page.waitForSelector('#model-card[hidden]', { state: 'attached', timeout: 300000 });
@@ -185,9 +188,14 @@ async function demo(perImage) {
   const shot = (name) => page.screenshot({ path: path.join(ROOT, 'media', 'screens', name) });
   const vidDir = fs.mkdtempSync(path.join(os.tmpdir(), 'kkv-'));
   ctx = await chromium.launchPersistentContext(profile, {
-    viewport, deviceScaleFactor: 2, recordVideo: { dir: vidDir, size: videoSize },
+    viewport: video, recordVideo: { dir: vidDir, size: video },
     permissions: ['clipboard-read', 'clipboard-write'],
   });
+  await ctx.addInitScript((z) => {
+    const apply = () => { if (document.documentElement) document.documentElement.style.zoom = String(z); };
+    apply();
+    document.addEventListener('readystatechange', apply);
+  }, ZOOM);
   page = ctx.pages()[0] || await ctx.newPage();
   page.on('dialog', (d) => { console.log('unexpected dialog:', d.message()); d.dismiss(); });
   await page.goto(base + '/');
@@ -277,9 +285,9 @@ async function demo(perImage) {
   await pause(2600);
   await caption(page, 'Open source (MIT): github.com/Ankan0503/hf26-week1. Now go touch grass 🌳');
   await pause(3200);
-  const video = page.video();
+  const rec = page.video();
   await ctx.close();
-  fs.copyFileSync(await video.path(), path.join(ROOT, 'media', 'demo.webm'));
+  fs.copyFileSync(await rec.path(), path.join(ROOT, 'media', 'demo.webm'));
 
   const used = new Set([right[0].file, right[1].file, wrong?.file, teach?.file].filter(Boolean));
   const cred = allPhotos.filter((c) => used.has(c.file));
