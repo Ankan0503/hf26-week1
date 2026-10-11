@@ -23,39 +23,52 @@ async function evaluate(browser) {
   const rows = [];
   const perImage = {};
   for (const cfg of CONFIGS) {
-    const page = await browser.newPage();
-    page.on('console', (m) => m.type() === 'error' && console.log('  [page]', m.text().slice(0, 200)));
-    await page.goto(`${base}/tools/eval.html`);
-    await page.waitForFunction(() => window.harnessReady);
-    const t0 = Date.now();
-    const info = await page.evaluate(([m, t]) => window.setup(m, t), [cfg.id, cfg.templates]);
-    let top1 = 0, top3 = 0, ms = 0;
-    const results = [];
-    for (const c of credits) {
-      const r = await page.evaluate((u) => window.classify(u), dataURL(c.file));
-      const names = r.brands.map((b) => b.name);
-      const hit1 = names[0] === c.brand, hit3 = names.slice(0, 3).includes(c.brand);
-      top1 += hit1; top3 += hit3; ms += r.ms;
-      results.push({ file: c.file, truth: c.brand, guess: r.brands[0], top3: names.slice(0, 3), hit1, hit3 });
+    try {
+      await evalConfig(browser, cfg, rows, perImage);
+    } catch (e) {
+      console.log('config failed', cfg, e.message);
+      rows.push({ model: cfg.id, templates: cfg.templates, error: e.message.split('\n')[0] });
     }
-    const n = credits.length;
-    const row = {
-      model: cfg.id, templates: cfg.templates, n,
-      top1: top1 / n, top3: top3 / n, msPerPhoto: ms / n, setupS: (Date.now() - t0) / 1000, initMs: info.initMs,
-    };
-    console.log(row);
-    rows.push(row);
-    perImage[`${cfg.id}|${cfg.templates}`] = results;
-    if (cfg === CONFIGS[0]) {
-      // Ship the default model's text embeddings so phones skip the text-model download.
-      const emb = await page.evaluate(() => window.exportEmbeddings());
-      const dir = path.join(ROOT, 'data', 'embeddings');
-      fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(path.join(dir, cfg.id.replace(/[^\w.-]+/g, '_') + '.json'), JSON.stringify(emb));
-      console.log('wrote embeddings for', Object.keys(emb).length, 'labels');
-    }
-    await page.close();
   }
+  return writeResults(rows, perImage);
+}
+
+async function evalConfig(browser, cfg, rows, perImage) {
+  const page = await browser.newPage();
+  page.on('console', (m) => m.type() === 'error' && console.log('  [page]', m.text().slice(0, 200)));
+  await page.goto(`${base}/tools/eval.html`);
+  await page.waitForFunction(() => window.harnessReady);
+  const t0 = Date.now();
+  const info = await page.evaluate(([m, t]) => window.setup(m, t), [cfg.id, cfg.templates]);
+  let top1 = 0, top3 = 0, ms = 0;
+  const results = [];
+  for (const c of credits) {
+    const r = await page.evaluate((u) => window.classify(u), dataURL(c.file));
+    const names = r.brands.map((b) => b.name);
+    const hit1 = names[0] === c.brand, hit3 = names.slice(0, 3).includes(c.brand);
+    top1 += hit1; top3 += hit3; ms += r.ms;
+    results.push({ file: c.file, truth: c.brand, guess: r.brands[0], top3: names.slice(0, 3), hit1, hit3 });
+  }
+  const n = credits.length;
+  const row = {
+    model: cfg.id, templates: cfg.templates, n,
+    top1: top1 / n, top3: top3 / n, msPerPhoto: ms / n, setupS: (Date.now() - t0) / 1000, initMs: info.initMs,
+  };
+  console.log(row);
+  rows.push(row);
+  perImage[`${cfg.id}|${cfg.templates}`] = results;
+  if (cfg === CONFIGS[0]) {
+    // Ship the default model's text embeddings so phones skip the text-model download.
+    const emb = await page.evaluate(() => window.exportEmbeddings());
+    const dir = path.join(ROOT, 'data', 'embeddings');
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, cfg.id.replace(/[^\w.-]+/g, '_') + '.json'), JSON.stringify(emb));
+    console.log('wrote embeddings for', Object.keys(emb).length, 'labels');
+  }
+  await page.close();
+}
+
+function writeResults(rows, perImage) {
   fs.mkdirSync(path.join(ROOT, 'eval'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'eval', 'results.json'), JSON.stringify({ rows, perImage }, null, 1));
   const pct = (x) => (x * 100).toFixed(0) + '%';
@@ -64,9 +77,13 @@ async function evaluate(browser) {
     `(${new Set(credits.map((c) => c.brand)).size} brands). Not all show litter, and some are noisy matches. Treat this as a smoke test, not a benchmark. ` +
     `Chance level for top-1 is about ${pct(1 / 42)}.\n\n`;
   md += '| Model | Prompts | Top-1 | Top-3 | ms / photo (CI CPU) |\n|---|---|---|---|---|\n';
-  for (const r of rows) md += `| \`${r.model}\` | ${r.templates} | ${pct(r.top1)} | ${pct(r.top3)} | ${r.msPerPhoto.toFixed(0)} |\n`;
+  for (const r of rows) {
+    md += r.error
+      ? `| \`${r.model}\` | ${r.templates} | failed: ${r.error} | | |\n`
+      : `| \`${r.model}\` | ${r.templates} | ${pct(r.top1)} | ${pct(r.top3)} | ${r.msPerPhoto.toFixed(0)} |\n`;
+  }
   md += '\n## Per photo (default config)\n\n| Photo | Truth | AI top guess | In top 3? |\n|---|---|---|---|\n';
-  for (const r of perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`]) {
+  for (const r of perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`] || []) {
     md += `| ${r.file} | ${r.truth} | ${r.guess.name} (${pct(r.guess.score)}) | ${r.hit3 ? '✅' : '❌'} |\n`;
   }
   fs.writeFileSync(path.join(ROOT, 'eval', 'RESULTS.md'), md);
@@ -110,6 +127,7 @@ async function demo(perImage) {
 
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'kk-'));
   const viewport = { width: 390, height: 844 };
+  const videoSize = { width: viewport.width * 2, height: viewport.height * 2 }; // record at device-pixel resolution
   // Warm-up run (not recorded): the one-time model download.
   let ctx = await chromium.launchPersistentContext(profile, { viewport });
   let page = ctx.pages()[0] || await ctx.newPage();
@@ -120,7 +138,7 @@ async function demo(perImage) {
   fs.mkdirSync(path.join(ROOT, 'media', 'screens'), { recursive: true });
   const vidDir = fs.mkdtempSync(path.join(os.tmpdir(), 'kkv-'));
   ctx = await chromium.launchPersistentContext(profile, {
-    viewport, deviceScaleFactor: 2, recordVideo: { dir: vidDir, size: viewport },
+    viewport, deviceScaleFactor: 2, recordVideo: { dir: vidDir, size: videoSize },
     permissions: ['clipboard-read', 'clipboard-write'],
   });
   page = ctx.pages()[0] || await ctx.newPage();
@@ -200,6 +218,7 @@ async function demo(perImage) {
 const browser = await chromium.launch();
 let perImage;
 if (what !== 'demo') perImage = await evaluate(browser);
+if (!perImage) throw new Error('default config produced no results; see eval/RESULTS.md');
 else perImage = JSON.parse(fs.readFileSync(path.join(ROOT, 'eval', 'results.json'), 'utf8')).perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`];
 await browser.close();
 if (what !== 'eval') await demo(perImage);

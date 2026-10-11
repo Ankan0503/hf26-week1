@@ -37,7 +37,7 @@ jobs:
           node tools/e2e.mjs http://localhost:8000 "$RUNNER_TEMP/images" all
       - name: Convert video
         run: |
-          ffmpeg -y -loglevel error -i media/demo.webm -vf "fps=30,scale=780:-2" -c:v libx264 -pix_fmt yuv420p -movflags +faststart media/demo.mp4
+          ffmpeg -y -loglevel error -i media/demo.webm -vf "fps=30" -c:v libx264 -pix_fmt yuv420p -movflags +faststart media/demo.mp4
           rm media/demo.webm
           ls -la media media/screens
       - name: Check GitHub Pages
