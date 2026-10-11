@@ -23,7 +23,9 @@ There's no indoor mode. The app is useless until you step outside and bend down.
 
 **Live app:** https://ankan0503.github.io/hf26-week1/ (open it on your phone)
 
-DEMO_MEDIA
+![Kiska Kachra demo: snap, guess, correct, teach, offline, share](https://raw.githubusercontent.com/Ankan0503/hf26-week1/main-gqkng3/media/demo.gif)
+
+Full-quality video: [media/demo.mp4](https://github.com/Ankan0503/hf26-week1/blob/main-gqkng3/media/demo.mp4)
 
 The demo isn't staged by hand. GitHub Actions recorded it while driving the real app with the real model on a phone-sized screen: snap, guess, fix a wrong guess, teach it a new brand, switch to airplane mode, and share.
 
@@ -37,7 +39,7 @@ Plain HTML/CSS/JS, no build step, MIT licensed.
 
 ### One open-weight model, used zero-shot
 
-I didn't have a labelled dataset of crushed chips packets, and I wasn't going to build one in a week. So the AI is **OpenAI's CLIP** (ViT-B/16), whose weights are open under MIT. I use the quantized ONNX port by Xenova and run it with **Transformers.js**. I first used the smaller ViT-B/32. The eval below showed B/16 roughly doubles top-1 accuracy for the same download size, at about 3–4× the compute per photo, so I switched. CLIP embeds images and text into the same space, which makes recognition a lookup:
+I didn't have a labelled dataset of crushed chips packets, and I wasn't going to build one in a week. So the AI is **OpenAI's CLIP** (ViT-B/16), whose weights are open under MIT. I use the quantized ONNX port by Xenova and run it with **Transformers.js**. I first used the smaller ViT-B/32. The eval below showed B/16 roughly doubles top-1 accuracy for the same download size, at about 3.7× the compute per photo, so I switched. CLIP embeds images and text into the same space, which makes recognition a lookup:
 
 - Every brand gets several prompt templates ("a photo of {} packaging", "the {} logo", "a crumpled {} wrapper, bottle or can"…). Their text embeddings are averaged into one vector per brand. Averaging prompts like this is a cheap, well-known way to make CLIP more reliable.
 - A photo goes through the vision encoder once. Cosine similarity against every brand vector, softmax at CLIP's own temperature, and you have a ranked guess.
@@ -65,7 +67,15 @@ I built this from a cloud sandbox while away from my laptop, so the real test ha
 3. writes the precomputed embeddings,
 4. drives the real app on a phone-sized screen and records the demo video above.
 
-EVAL_TABLE
+**Real results from CI** (headless Chromium on a GitHub runner CPU; a phone will be slower):
+
+| Model | Prompts | Top-1 | Top-3 | ms / photo | Phone download |
+|---|---|---|---|---|---|
+| `Xenova/clip-vit-base-patch16` | ensemble | 33% | 47% | 812 | 87 MB |
+| `Xenova/clip-vit-base-patch16` | single | 31% | 45% | 811 | 87 MB |
+| `Xenova/clip-vit-base-patch32` | ensemble | 20% | 38% | 221 | 89 MB |
+
+Test set: 122 freely licensed photos across 41 brands; chance level is about 2%. It's small and noisy (Commons search results aren't all litter), so treat it as a smoke test, not a benchmark. Full per-photo results: [`eval/RESULTS.md`](https://github.com/Ankan0503/hf26-week1/blob/main-gqkng3/eval/RESULTS.md).
 
 ### What it can't do (yet)
 
