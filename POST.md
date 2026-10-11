@@ -1,10 +1,10 @@
 ---
-title: Kiska Kachra: an open-weight AI in your phone's browser that asks "whose trash is this?"
-published: false
-tags: devchallenge, hf26challenge, ai, opensource
+title: "Kiska Kachra: an open-weight AI in your phone's browser that asks whose trash this is"
+published:
+tags: devchallenge, hf26challenge
 ---
 
-*This is a submission for the [Hacktoberfest 2026 Open-Source AI Challenge, Week 1: Touch Grass](https://dev.to/challenges).*
+*This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 1: Touch Grass](https://dev.to/challenges/hacktoberfest-week1-2026-10-05)*
 
 ## What I Built
 
@@ -31,9 +31,9 @@ The demo isn't staged by hand. GitHub Actions recorded it while driving the real
 
 ## Code
 
-{% github Ankan0503/hf26-week1 %}
+**Repo:** https://github.com/Ankan0503/hf26-week1/tree/main-gqkng3
 
-Plain HTML/CSS/JS, no build step, MIT licensed.
+Plain HTML/CSS/JS, no build step, MIT licensed. The interesting files are `ai.js` (the recognizer), `data/labels.json` (brands and prompts), `tools/e2e.mjs` (real-model eval + the demo recording) and `.github/workflows/verify.yml`.
 
 ## How I Built It
 
@@ -89,11 +89,5 @@ Test set: 122 freely licensed photos across 41 brands; chance level is about 2%.
 This project is a chain of things people gave away. OpenAI released CLIP's weights. Xenova converted them to ONNX. Hugging Face built Transformers.js so a browser tab can run them. Microsoft open-sourced ONNX Runtime. Wikimedia and Open Food Facts contributors photographed products under free licenses, which let me test the model honestly. Because of all that, someone with a phone and no GPU budget can ship an AI app that costs nothing to host, nothing per inference, and sends nothing to anyone's server.
 
 Openness matters even more here because the *data* is civic. A brand audit only persuades if people can check how it was counted. With an open model, an open label list, open code and a published eval, anyone can see exactly how "Lay's: 7" was produced, and anyone can add the brands littering *their* street with a one-line pull request.
-
-## Prize Categories
-
-<!-- Edit to match the prize categories listed on the challenge page -->
-- **Best use of open-weight models / Hugging Face:** CLIP via Transformers.js, fully on-device.
-- **Overall Touch Grass:** it only works outside, with your hands dirty.
 
 Thanks for reading. Now go pick something up. 🌳
