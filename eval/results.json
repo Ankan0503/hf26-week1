@@ -1,0 +1,5580 @@
+{
+ "rows": [
+  {
+   "model": "Xenova/clip-vit-base-patch16",
+   "templates": "ensemble",
+   "n": 123,
+   "top1": 0.3333333333333333,
+   "top3": 0.45528455284552843,
+   "msPerPhoto": 817.0235772357742,
+   "setupS": 112.301,
+   "initMs": 10960.100000000006,
+   "visionMB": 87.466645
+  },
+  {
+   "model": "Xenova/clip-vit-base-patch16",
+   "templates": "single",
+   "n": 123,
+   "top1": 0.3008130081300813,
+   "top3": 0.43902439024390244,
+   "msPerPhoto": 814.756097560978,
+   "setupS": 108.241,
+   "initMs": 7222.400000000023,
+   "visionMB": 87.466645
+  },
+  {
+   "model": "Xenova/clip-vit-base-patch32",
+   "templates": "ensemble",
+   "n": 123,
+   "top1": 0.21951219512195122,
+   "top3": 0.3902439024390244,
+   "msPerPhoto": 223.98292682926706,
+   "setupS": 37.218,
+   "initMs": 8794.300000000047,
+   "visionMB": 89.122045
+  }
+ ],
+ "perImage": {
+  "Xenova/clip-vit-base-patch16|ensemble": [
+   {
+    "file": "Lay's/0.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.14300375166964632
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "KitKat"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/1.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.09867322895569573
+    },
+    "top3": [
+     "Gold Flake",
+     "Coca-Cola",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/2.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.24049567653143103
+    },
+    "top3": [
+     "Gold Flake",
+     "Slice",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/0.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.06890835618074327
+    },
+    "top3": [
+     "Tropicana",
+     "Sting",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/1.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.11483675978074967
+    },
+    "top3": [
+     "Aquafina",
+     "Sting",
+     "Real"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/2.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Maggi",
+     "score": 0.0974165396425713
+    },
+    "top3": [
+     "Maggi",
+     "Gold Flake",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/0.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.12762418382807636
+    },
+    "top3": [
+     "Coca-Cola",
+     "Unbranded / unreadable",
+     "Fanta"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/1.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.36421863506639934
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Sprite",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/2.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.43774023801038586
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Tropicana",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Uncle Chipps/0.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.20872227082863706
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Frooti",
+     "Maggi"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/1.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.3808545392974781
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Gold Flake",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/2.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.908127009683903
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Unbranded / unreadable",
+     "Limca"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/0.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.49820462326895365
+    },
+    "top3": [
+     "Haldiram's",
+     "McDonald's",
+     "Starbucks"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/1.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.9098624436122278
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Rajnigandha"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/2.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.150569404736013
+    },
+    "top3": [
+     "Frooti",
+     "Haldiram's",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Balaji/0.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "7Up",
+     "score": 0.06066633349358067
+    },
+    "top3": [
+     "7Up",
+     "Sunfeast",
+     "Thums Up"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/1.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.11132946845433223
+    },
+    "top3": [
+     "Red Bull",
+     "Rajnigandha",
+     "7Up"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/2.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.13665218781796024
+    },
+    "top3": [
+     "Rajnigandha",
+     "Vimal",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Parle-G/0.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Parle-G",
+     "score": 0.8951898973778004
+    },
+    "top3": [
+     "Parle-G",
+     "Gold Flake",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Parle-G/1.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.15994810928796735
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Gold Flake",
+     "Slice"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Parle-G/2.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Bingo",
+     "score": 0.07322928628470296
+    },
+    "top3": [
+     "Bingo",
+     "Coca-Cola",
+     "Britannia"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Britannia/0.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Sting",
+     "score": 0.08810724908425721
+    },
+    "top3": [
+     "Sting",
+     "Britannia",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Britannia/1.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.12102462104647974
+    },
+    "top3": [
+     "Britannia",
+     "Sunfeast",
+     "Domino's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Britannia/2.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.14836190935381366
+    },
+    "top3": [
+     "Britannia",
+     "Balaji",
+     "Mother Dairy"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sunfeast/0.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.23463765304706263
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/1.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.12293823382739609
+    },
+    "top3": [
+     "Rajnigandha",
+     "Kurkure",
+     "Maaza"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/2.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.4673795591901496
+    },
+    "top3": [
+     "Red Bull",
+     "Rajnigandha",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/0.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Maggi",
+     "score": 0.2199462095957163
+    },
+    "top3": [
+     "Maggi",
+     "Haldiram's",
+     "Zomato"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Maggi/1.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.22733250713186887
+    },
+    "top3": [
+     "Mother Dairy",
+     "Gold Flake",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/2.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.12603235338039687
+    },
+    "top3": [
+     "Haldiram's",
+     "Maggi",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/0.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.8776742452099031
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Haldiram's",
+     "Mother Dairy"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/1.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.8616187751362535
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Paper Boat"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/2.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.570771828114359
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Domino's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/0.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "KitKat",
+     "score": 0.9368886409891692
+    },
+    "top3": [
+     "KitKat",
+     "Cadbury Dairy Milk",
+     "Gold Flake"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/1.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.20308530768934838
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/2.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.0906131993376052
+    },
+    "top3": [
+     "Zomato",
+     "Vimal",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/0.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.14181504623199137
+    },
+    "top3": [
+     "Rajnigandha",
+     "Mother Dairy",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/1.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Mountain Dew",
+     "score": 0.3929938462184359
+    },
+    "top3": [
+     "Mountain Dew",
+     "Frooti",
+     "Aquafina"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/2.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.2120804546594181
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mother Dairy/0.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.9886913648632979
+    },
+    "top3": [
+     "Mother Dairy",
+     "Cadbury Dairy Milk",
+     "Lay's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mother Dairy/1.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.23499971513510276
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Mother Dairy/2.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.2537681992182275
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Coca-Cola/0.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.10730864446161534
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Limca",
+     "Fanta"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Coca-Cola/1.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.2623531306448734
+    },
+    "top3": [
+     "Coca-Cola",
+     "Unbranded / unreadable",
+     "Fanta"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Coca-Cola/2.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.15511835681978617
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Tropicana",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Pepsi/0.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.8148540427715032
+    },
+    "top3": [
+     "Pepsi",
+     "Unbranded / unreadable",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/1.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.904346225438911
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/2.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.14972659281393372
+    },
+    "top3": [
+     "Paper Boat",
+     "Gold Flake",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/0.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.538084946365261
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/1.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.24470682524955162
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/2.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.21195651740995408
+    },
+    "top3": [
+     "Haldiram's",
+     "Pepsi",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/0.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.2454734778641802
+    },
+    "top3": [
+     "Sprite",
+     "Pepsi",
+     "Aquafina"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sprite/1.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Kurkure",
+     "score": 0.08257648155460653
+    },
+    "top3": [
+     "Kurkure",
+     "Coca-Cola",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/2.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Sunfeast",
+     "score": 0.08662418211283404
+    },
+    "top3": [
+     "Sunfeast",
+     "Frooti",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/0.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Fanta",
+     "score": 0.9645460610658487
+    },
+    "top3": [
+     "Fanta",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Fanta/1.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.11894976157997064
+    },
+    "top3": [
+     "Sprite",
+     "Tropicana",
+     "Starbucks"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/2.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.18665366413314696
+    },
+    "top3": [
+     "Gold Flake",
+     "Tropicana",
+     "Fanta"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Limca/0.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.40153240922804906
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/1.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.3341124976985087
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/2.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Limca",
+     "score": 0.35169939411660023
+    },
+    "top3": [
+     "Limca",
+     "Coca-Cola",
+     "Fanta"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/0.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.37884526161600457
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Sprite",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/1.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.14345108553102062
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/2.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.23567821287640428
+    },
+    "top3": [
+     "Gold Flake",
+     "Sprite",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "7Up/0.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.16094806672056206
+    },
+    "top3": [
+     "Zomato",
+     "Maggi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/1.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.2348307033276076
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/2.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.2984727976960629
+    },
+    "top3": [
+     "Sprite",
+     "Pepsi",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/0.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.2804293263776909
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Maggi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/1.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.1308663411199138
+    },
+    "top3": [
+     "Rajnigandha",
+     "Swiggy",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/2.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.07328954063726531
+    },
+    "top3": [
+     "Domino's",
+     "Rajnigandha",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/0.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.2940307971503849
+    },
+    "top3": [
+     "Pepsi",
+     "Fanta",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/1.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.06324820141783838
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Amul",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/2.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.4940679389172288
+    },
+    "top3": [
+     "Frooti",
+     "Fanta",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Slice/0.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.14199691958522187
+    },
+    "top3": [
+     "Domino's",
+     "Mother Dairy",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/1.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.1017398149952375
+    },
+    "top3": [
+     "Aquafina",
+     "Coca-Cola",
+     "Fanta"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/2.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Slice",
+     "score": 0.2279470712271076
+    },
+    "top3": [
+     "Slice",
+     "Mountain Dew",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Bisleri/0.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.09677658889686246
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Kinley",
+     "Bisleri"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Bisleri/1.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.08104086842228528
+    },
+    "top3": [
+     "McDonald's",
+     "Domino's",
+     "Slice"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bisleri/2.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.10665508411151972
+    },
+    "top3": [
+     "Britannia",
+     "Mountain Dew",
+     "Maaza"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/0.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Bingo",
+     "score": 0.13238570696098434
+    },
+    "top3": [
+     "Bingo",
+     "Domino's",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/1.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.0880289773163971
+    },
+    "top3": [
+     "Coca-Cola",
+     "Rajnigandha",
+     "Britannia"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/2.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Sting",
+     "score": 0.12925732437085355
+    },
+    "top3": [
+     "Sting",
+     "Real",
+     "7Up"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Aquafina/0.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.2419552240169877
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Paper Boat",
+     "Aquafina"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Aquafina/1.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.06579193049083108
+    },
+    "top3": [
+     "Coca-Cola",
+     "Maaza",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Aquafina/2.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.9824072256152863
+    },
+    "top3": [
+     "Aquafina",
+     "Fanta",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/0.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.4440841253531612
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Red Bull/1.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.2759029497603302
+    },
+    "top3": [
+     "Red Bull",
+     "Pepsi",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/2.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.3641023746840934
+    },
+    "top3": [
+     "Red Bull",
+     "Pepsi",
+     "7Up"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sting/0.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.11116458683506811
+    },
+    "top3": [
+     "Red Bull",
+     "Sunfeast",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/1.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.10264924895445283
+    },
+    "top3": [
+     "Britannia",
+     "Aquafina",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/2.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Sting",
+     "score": 0.297769693370647
+    },
+    "top3": [
+     "Sting",
+     "Uncle Chipps",
+     "Britannia"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/0.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.8641296891404752
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "Mountain Dew"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/1.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.12622251414366734
+    },
+    "top3": [
+     "Paper Boat",
+     "Bingo",
+     "Limca"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/2.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.9471717164479444
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "Lay's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Real/0.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.08699866364396075
+    },
+    "top3": [
+     "Domino's",
+     "Real",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Real/1.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Sunfeast",
+     "score": 0.11242819462777069
+    },
+    "top3": [
+     "Sunfeast",
+     "Parle-G",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Real/2.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.27060859557662736
+    },
+    "top3": [
+     "Rajnigandha",
+     "Britannia",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/0.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.07926551028496229
+    },
+    "top3": [
+     "Tropicana",
+     "Unbranded / unreadable",
+     "McDonald's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Tropicana/1.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Bingo",
+     "score": 0.06364011916647572
+    },
+    "top3": [
+     "Bingo",
+     "Real",
+     "Tropicana"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Tropicana/2.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.2500292021223464
+    },
+    "top3": [
+     "Tropicana",
+     "Bingo",
+     "Sunfeast"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/0.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.29994457863386353
+    },
+    "top3": [
+     "Britannia",
+     "Bingo",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Gold Flake/1.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.9949642991066399
+    },
+    "top3": [
+     "Gold Flake",
+     "Coca-Cola",
+     "Britannia"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/2.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.3397567428189423
+    },
+    "top3": [
+     "Gold Flake",
+     "Rajnigandha",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Rajnigandha/0.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.10698249701648592
+    },
+    "top3": [
+     "Balaji",
+     "Amul",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Rajnigandha/1.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.10145970772152575
+    },
+    "top3": [
+     "Balaji",
+     "Rajnigandha",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Rajnigandha/2.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.5724373787777541
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Amul"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Vimal/0.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.3410218724544635
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Frooti"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/1.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.27479387973005537
+    },
+    "top3": [
+     "Rajnigandha",
+     "Britannia",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/2.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.34161787997224863
+    },
+    "top3": [
+     "Haldiram's",
+     "Rajnigandha",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "McDonald's/0.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.9849774217826414
+    },
+    "top3": [
+     "McDonald's",
+     "Unbranded / unreadable",
+     "Maggi"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "McDonald's/1.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.17680301749095256
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Domino's",
+     "Starbucks"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "McDonald's/2.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.32085325850055085
+    },
+    "top3": [
+     "Domino's",
+     "Unbranded / unreadable",
+     "Paper Boat"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Domino's/0.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.18906168740789814
+    },
+    "top3": [
+     "Domino's",
+     "Sunfeast",
+     "KitKat"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/1.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.7347098635558411
+    },
+    "top3": [
+     "Domino's",
+     "McDonald's",
+     "Starbucks"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/2.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.8060132306252207
+    },
+    "top3": [
+     "Pepsi",
+     "Coca-Cola",
+     "McDonald's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/0.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Thums Up",
+     "score": 0.3952605398846932
+    },
+    "top3": [
+     "Thums Up",
+     "Kurkure",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/1.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.13690446622270463
+    },
+    "top3": [
+     "Haldiram's",
+     "Amul",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/2.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.3140087023773638
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Britannia",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Zomato/0.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.2943012538943812
+    },
+    "top3": [
+     "Zomato",
+     "McDonald's",
+     "Frooti"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Zomato/1.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.10005163769727413
+    },
+    "top3": [
+     "Domino's",
+     "Maggi",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Zomato/2.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.15044044335715404
+    },
+    "top3": [
+     "Zomato",
+     "Balaji",
+     "Haldiram's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/0.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.33014741193620917
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "Tropicana"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/1.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.28970564201391014
+    },
+    "top3": [
+     "Tropicana",
+     "Unbranded / unreadable",
+     "Bisleri"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Starbucks/2.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.9073873847936406
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "Mountain Dew"
+    ],
+    "hit1": true,
+    "hit3": true
+   }
+  ],
+  "Xenova/clip-vit-base-patch16|single": [
+   {
+    "file": "Lay's/0.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.11490574054836263
+    },
+    "top3": [
+     "Starbucks",
+     "Parle-G",
+     "Bingo"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/1.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.08903786413481038
+    },
+    "top3": [
+     "Coca-Cola",
+     "Fanta",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/2.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.29860642250418956
+    },
+    "top3": [
+     "Gold Flake",
+     "Slice",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/0.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Bisleri",
+     "score": 0.0846020729039198
+    },
+    "top3": [
+     "Bisleri",
+     "Swiggy",
+     "Tropicana"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/1.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.15965139311662832
+    },
+    "top3": [
+     "Aquafina",
+     "Mother Dairy",
+     "Real"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/2.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Maggi",
+     "score": 0.10878658115437734
+    },
+    "top3": [
+     "Maggi",
+     "Sunfeast",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Bingo/0.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.17929383667312845
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Coca-Cola",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/1.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.519072145925684
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Sprite",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/2.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.6965815178842869
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Tropicana",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Uncle Chipps/0.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.19586216904052856
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Limca",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/1.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.44197453879824594
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Limca",
+     "Gold Flake"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/2.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.8569079948566741
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Limca",
+     "Real"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/0.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.34638548141448844
+    },
+    "top3": [
+     "Haldiram's",
+     "McDonald's",
+     "Starbucks"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/1.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.8352236190113268
+    },
+    "top3": [
+     "Haldiram's",
+     "Rajnigandha",
+     "Balaji"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/2.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.1721231097543706
+    },
+    "top3": [
+     "Frooti",
+     "Sunfeast",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/0.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.11595541559996315
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Rajnigandha",
+     "Bingo"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/1.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.18971185749604444
+    },
+    "top3": [
+     "Rajnigandha",
+     "Red Bull",
+     "Uncle Chipps"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/2.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.25653349774488843
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Parle-G/0.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Parle-G",
+     "score": 0.9664809935433828
+    },
+    "top3": [
+     "Parle-G",
+     "Coca-Cola",
+     "Gold Flake"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Parle-G/1.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Slice",
+     "score": 0.11309093541641684
+    },
+    "top3": [
+     "Slice",
+     "Gold Flake",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Parle-G/2.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.10073616085899474
+    },
+    "top3": [
+     "Rajnigandha",
+     "Domino's",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Britannia/0.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.10926177137038869
+    },
+    "top3": [
+     "Rajnigandha",
+     "Britannia",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Britannia/1.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.10631698748416751
+    },
+    "top3": [
+     "Mother Dairy",
+     "Britannia",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Britannia/2.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.15534240338482605
+    },
+    "top3": [
+     "Mother Dairy",
+     "Balaji",
+     "Britannia"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Sunfeast/0.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.31789164979415535
+    },
+    "top3": [
+     "Balaji",
+     "Rajnigandha",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/1.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.18639493962755596
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Rajnigandha",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/2.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.3133162110090269
+    },
+    "top3": [
+     "Red Bull",
+     "Rajnigandha",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/0.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Maggi",
+     "score": 0.1692410899284296
+    },
+    "top3": [
+     "Maggi",
+     "Haldiram's",
+     "Frooti"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Maggi/1.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.09297633040955411
+    },
+    "top3": [
+     "Haldiram's",
+     "Kurkure",
+     "Gold Flake"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/2.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Maggi",
+     "score": 0.11409238382933967
+    },
+    "top3": [
+     "Maggi",
+     "Haldiram's",
+     "Kurkure"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/0.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.6969886179107496
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/1.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.8197250027271299
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Paper Boat"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/2.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.3966189580975718
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Domino's",
+     "Slice"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/0.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "KitKat",
+     "score": 0.2896222646840343
+    },
+    "top3": [
+     "KitKat",
+     "Cadbury Dairy Milk",
+     "Kinley"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/1.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.09627339002047107
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/2.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.13592973255943622
+    },
+    "top3": [
+     "Zomato",
+     "Unbranded / unreadable",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/0.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.21872057096162414
+    },
+    "top3": [
+     "Rajnigandha",
+     "Red Bull",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/1.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Mountain Dew",
+     "score": 0.3508512008621188
+    },
+    "top3": [
+     "Mountain Dew",
+     "Frooti",
+     "Aquafina"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/2.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.36073753645255763
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Mother Dairy/0.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.9622291644378153
+    },
+    "top3": [
+     "Mother Dairy",
+     "Cadbury Dairy Milk",
+     "Frooti"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mother Dairy/1.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.28337855998488054
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Mother Dairy/2.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.44014595248331534
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Coca-Cola/0.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.2823683695874545
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Fanta",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Coca-Cola/1.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.1705809155637366
+    },
+    "top3": [
+     "Coca-Cola",
+     "Unbranded / unreadable",
+     "Fanta"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Coca-Cola/2.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.27820206609830384
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Tropicana",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Pepsi/0.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.6628491742420461
+    },
+    "top3": [
+     "Pepsi",
+     "Unbranded / unreadable",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/1.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.898606143104826
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/2.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.14616414037591474
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Paper Boat",
+     "Gold Flake"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/0.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.43467971510400943
+    },
+    "top3": [
+     "Pepsi",
+     "Mountain Dew",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/1.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.29898089611385203
+    },
+    "top3": [
+     "Pepsi",
+     "Sprite",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/2.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.16276859341703423
+    },
+    "top3": [
+     "Pepsi",
+     "Haldiram's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/0.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.3044495185637812
+    },
+    "top3": [
+     "Sprite",
+     "Pepsi",
+     "Mountain Dew"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sprite/1.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Parle-G",
+     "score": 0.14395392423421366
+    },
+    "top3": [
+     "Parle-G",
+     "Coca-Cola",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/2.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Swiggy",
+     "score": 0.12381420468914753
+    },
+    "top3": [
+     "Swiggy",
+     "Rajnigandha",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/0.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Fanta",
+     "score": 0.7579983770787226
+    },
+    "top3": [
+     "Fanta",
+     "Sprite",
+     "Pepsi"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Fanta/1.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.17183185255699485
+    },
+    "top3": [
+     "Sprite",
+     "Red Bull",
+     "Frooti"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/2.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Mountain Dew",
+     "score": 0.12519701801557176
+    },
+    "top3": [
+     "Mountain Dew",
+     "Gold Flake",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/0.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.35816067089261006
+    },
+    "top3": [
+     "Coca-Cola",
+     "Sprite",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/1.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.46932410226808197
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/2.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Limca",
+     "score": 0.6855115293961354
+    },
+    "top3": [
+     "Limca",
+     "Coca-Cola",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/0.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.37464697623737675
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Sprite",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/1.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Mountain Dew",
+     "score": 0.14341767659641416
+    },
+    "top3": [
+     "Mountain Dew",
+     "Coca-Cola",
+     "Sprite"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/2.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.22009756790567947
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Gold Flake"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "7Up/0.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.13046424290749645
+    },
+    "top3": [
+     "Zomato",
+     "McDonald's",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/1.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.24057696558231628
+    },
+    "top3": [
+     "Sprite",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/2.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.5763380215709847
+    },
+    "top3": [
+     "Sprite",
+     "Pepsi",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/0.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.2746860281024886
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/1.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.16411496574796133
+    },
+    "top3": [
+     "Rajnigandha",
+     "Zomato",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/2.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Kinley",
+     "score": 0.0821731993402719
+    },
+    "top3": [
+     "Kinley",
+     "Domino's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/0.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.3584167568915537
+    },
+    "top3": [
+     "Pepsi",
+     "Fanta",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/1.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Limca",
+     "score": 0.06349967041412136
+    },
+    "top3": [
+     "Limca",
+     "Balaji",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/2.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.4538621887033088
+    },
+    "top3": [
+     "Frooti",
+     "Sprite",
+     "Amul"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Slice/0.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.12165059057236086
+    },
+    "top3": [
+     "Domino's",
+     "Sunfeast",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/1.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.08440421661051288
+    },
+    "top3": [
+     "Aquafina",
+     "Coca-Cola",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/2.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Slice",
+     "score": 0.42288069963275443
+    },
+    "top3": [
+     "Slice",
+     "Mountain Dew",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Bisleri/0.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Kinley",
+     "score": 0.10044713907024982
+    },
+    "top3": [
+     "Kinley",
+     "Bisleri",
+     "Uncle Chipps"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Bisleri/1.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Slice",
+     "score": 0.059938291972767295
+    },
+    "top3": [
+     "Slice",
+     "Domino's",
+     "McDonald's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bisleri/2.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.11081433347044259
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Mountain Dew",
+     "Maaza"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/0.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.16368803766084664
+    },
+    "top3": [
+     "Red Bull",
+     "Bingo",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/1.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.13411292681931444
+    },
+    "top3": [
+     "Rajnigandha",
+     "Coca-Cola",
+     "Britannia"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/2.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Sting",
+     "score": 0.07800066408291854
+    },
+    "top3": [
+     "Sting",
+     "Kinley",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Aquafina/0.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.5861464929397554
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Aquafina",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Aquafina/1.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Amul",
+     "score": 0.07115762926271134
+    },
+    "top3": [
+     "Amul",
+     "Rajnigandha",
+     "Maaza"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Aquafina/2.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.9758703054286437
+    },
+    "top3": [
+     "Aquafina",
+     "Sprite",
+     "Fanta"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/0.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Sprite",
+     "score": 0.44455290381230844
+    },
+    "top3": [
+     "Sprite",
+     "Pepsi",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Red Bull/1.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.3698357962670155
+    },
+    "top3": [
+     "Pepsi",
+     "Red Bull",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/2.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.2761646703252244
+    },
+    "top3": [
+     "Red Bull",
+     "Kinley",
+     "Balaji"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sting/0.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.2256464705853422
+    },
+    "top3": [
+     "Red Bull",
+     "Sunfeast",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/1.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.08760637857987737
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Britannia",
+     "Aquafina"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/2.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Sting",
+     "score": 0.3339759874641916
+    },
+    "top3": [
+     "Sting",
+     "Uncle Chipps",
+     "Red Bull"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/0.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.6556253806215624
+    },
+    "top3": [
+     "Paper Boat",
+     "Mountain Dew",
+     "Pepsi"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/1.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.13794516987808894
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Bingo",
+     "Paper Boat"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/2.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.9099352893639409
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "7Up"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Real/0.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.21798089153505276
+    },
+    "top3": [
+     "Red Bull",
+     "Mountain Dew",
+     "Bisleri"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Real/1.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Sunfeast",
+     "score": 0.09955725171577515
+    },
+    "top3": [
+     "Sunfeast",
+     "Swiggy",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Real/2.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.26918321562764697
+    },
+    "top3": [
+     "Rajnigandha",
+     "Britannia",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/0.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.07709289190216513
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Swiggy",
+     "Bingo"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/1.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Swiggy",
+     "score": 0.08209813100515616
+    },
+    "top3": [
+     "Swiggy",
+     "Vimal",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/2.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.18507309484346932
+    },
+    "top3": [
+     "Tropicana",
+     "Swiggy",
+     "Bingo"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/0.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.2075679113217283
+    },
+    "top3": [
+     "Britannia",
+     "Kinley",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Gold Flake/1.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.9793205504356115
+    },
+    "top3": [
+     "Gold Flake",
+     "Coca-Cola",
+     "Fanta"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/2.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.2850932728384241
+    },
+    "top3": [
+     "Gold Flake",
+     "Balaji",
+     "Rajnigandha"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Rajnigandha/0.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.12983656492994977
+    },
+    "top3": [
+     "Balaji",
+     "Amul",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Rajnigandha/1.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.10480243621414474
+    },
+    "top3": [
+     "Balaji",
+     "Slice",
+     "Parle-G"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Rajnigandha/2.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.571199492704797
+    },
+    "top3": [
+     "Rajnigandha",
+     "Balaji",
+     "Britannia"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Vimal/0.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.2684341599312866
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/1.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.26470489926785384
+    },
+    "top3": [
+     "Rajnigandha",
+     "Britannia",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/2.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.31120420821008565
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "McDonald's/0.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.9460894284833418
+    },
+    "top3": [
+     "McDonald's",
+     "Unbranded / unreadable",
+     "Maaza"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "McDonald's/1.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.14922776792853448
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "McDonald's/2.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.309047340275734
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Domino's",
+     "McDonald's"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/0.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.18423101666454494
+    },
+    "top3": [
+     "Domino's",
+     "Sunfeast",
+     "KitKat"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/1.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Domino's",
+     "score": 0.7801226694287379
+    },
+    "top3": [
+     "Domino's",
+     "Starbucks",
+     "McDonald's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/2.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.7495156164120165
+    },
+    "top3": [
+     "Pepsi",
+     "McDonald's",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/0.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Kurkure",
+     "score": 0.3634902202754204
+    },
+    "top3": [
+     "Kurkure",
+     "Thums Up",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/1.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.11439115518057488
+    },
+    "top3": [
+     "Rajnigandha",
+     "Zomato",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/2.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.4741988424011314
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Parle-G",
+     "Real"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Zomato/0.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.20542360643884025
+    },
+    "top3": [
+     "Zomato",
+     "Red Bull",
+     "Frooti"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Zomato/1.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.08686928132896998
+    },
+    "top3": [
+     "Zomato",
+     "Maggi",
+     "Parle-G"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Zomato/2.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.10495223272525256
+    },
+    "top3": [
+     "Haldiram's",
+     "Zomato",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/0.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.5600853150576778
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Starbucks",
+     "Tropicana"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/1.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.2957294266789911
+    },
+    "top3": [
+     "Tropicana",
+     "Unbranded / unreadable",
+     "Starbucks"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/2.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.8587176036855313
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "Mountain Dew"
+    ],
+    "hit1": true,
+    "hit3": true
+   }
+  ],
+  "Xenova/clip-vit-base-patch32|ensemble": [
+   {
+    "file": "Lay's/0.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.1913638015387118
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/1.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.21936204512899338
+    },
+    "top3": [
+     "Pepsi",
+     "McDonald's",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Lay's/2.jpg",
+    "truth": "Lay's",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.12762133403248777
+    },
+    "top3": [
+     "Gold Flake",
+     "Frooti",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/0.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.11423742227411256
+    },
+    "top3": [
+     "Britannia",
+     "Rajnigandha",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kurkure/1.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.10817510433759275
+    },
+    "top3": [
+     "Mother Dairy",
+     "Slice",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Kurkure/2.jpg",
+    "truth": "Kurkure",
+    "guess": {
+     "name": "Sunfeast",
+     "score": 0.2156482187239335
+    },
+    "top3": [
+     "Sunfeast",
+     "Haldiram's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/0.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.11529341084687424
+    },
+    "top3": [
+     "Pepsi",
+     "Coca-Cola",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/1.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.4551451179832691
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Pepsi",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bingo/2.jpg",
+    "truth": "Bingo",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.19064005172339923
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Britannia",
+     "Amul"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Uncle Chipps/0.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.16354471373945048
+    },
+    "top3": [
+     "Pepsi",
+     "Uncle Chipps",
+     "Frooti"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/1.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.5011138993598423
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Uncle Chipps",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Uncle Chipps/2.jpg",
+    "truth": "Uncle Chipps",
+    "guess": {
+     "name": "Uncle Chipps",
+     "score": 0.19505350864275464
+    },
+    "top3": [
+     "Uncle Chipps",
+     "Pepsi",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/0.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.5777334659425926
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Coca-Cola",
+     "McDonald's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Haldiram's/1.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.26528868546505285
+    },
+    "top3": [
+     "Haldiram's",
+     "McDonald's",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Haldiram's/2.jpg",
+    "truth": "Haldiram's",
+    "guess": {
+     "name": "Slice",
+     "score": 0.12210386935558114
+    },
+    "top3": [
+     "Slice",
+     "Sunfeast",
+     "Gold Flake"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/0.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.06578698405501972
+    },
+    "top3": [
+     "Red Bull",
+     "Haldiram's",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/1.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.08893094712384893
+    },
+    "top3": [
+     "Red Bull",
+     "Haldiram's",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Balaji/2.jpg",
+    "truth": "Balaji",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.35412782197339815
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Parle-G/0.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.13615855308667976
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Balaji",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Parle-G/1.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.336369265582626
+    },
+    "top3": [
+     "Gold Flake",
+     "Cadbury Dairy Milk",
+     "Slice"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Parle-G/2.jpg",
+    "truth": "Parle-G",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.12138260787334203
+    },
+    "top3": [
+     "Britannia",
+     "Mother Dairy",
+     "Aquafina"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Britannia/0.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.21069544748783758
+    },
+    "top3": [
+     "Britannia",
+     "Haldiram's",
+     "Kinley"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Britannia/1.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Vimal",
+     "score": 0.0794512630651732
+    },
+    "top3": [
+     "Vimal",
+     "Uncle Chipps",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Britannia/2.jpg",
+    "truth": "Britannia",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.4045487298716878
+    },
+    "top3": [
+     "Britannia",
+     "Haldiram's",
+     "Balaji"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sunfeast/0.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.4110746299782675
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Britannia"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/1.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "KitKat",
+     "score": 0.07172409273331604
+    },
+    "top3": [
+     "KitKat",
+     "Lay's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sunfeast/2.jpg",
+    "truth": "Sunfeast",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.08496061417312349
+    },
+    "top3": [
+     "Red Bull",
+     "Swiggy",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/0.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Rajnigandha",
+     "score": 0.15225110014610413
+    },
+    "top3": [
+     "Rajnigandha",
+     "Haldiram's",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/1.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.15172291949080824
+    },
+    "top3": [
+     "Haldiram's",
+     "Sunfeast",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maggi/2.jpg",
+    "truth": "Maggi",
+    "guess": {
+     "name": "Zomato",
+     "score": 0.10105629315365584
+    },
+    "top3": [
+     "Zomato",
+     "Haldiram's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Cadbury Dairy Milk/0.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.9771069950074669
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "KitKat",
+     "Balaji"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/1.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.6757140218543259
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Paper Boat",
+     "Slice"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Cadbury Dairy Milk/2.jpg",
+    "truth": "Cadbury Dairy Milk",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.20533528217754374
+    },
+    "top3": [
+     "Paper Boat",
+     "Cadbury Dairy Milk",
+     "Slice"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/0.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "KitKat",
+     "score": 0.8037434437953954
+    },
+    "top3": [
+     "KitKat",
+     "Cadbury Dairy Milk",
+     "Gold Flake"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "KitKat/1.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.088636359631978
+    },
+    "top3": [
+     "Paper Boat",
+     "Slice",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "KitKat/2.jpg",
+    "truth": "KitKat",
+    "guess": {
+     "name": "Parle-G",
+     "score": 0.06140904622904019
+    },
+    "top3": [
+     "Parle-G",
+     "Zomato",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/0.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.1257326539872723
+    },
+    "top3": [
+     "Britannia",
+     "Balaji",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/1.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.7808746405062995
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Limca",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Amul/2.jpg",
+    "truth": "Amul",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.14373342383839158
+    },
+    "top3": [
+     "Haldiram's",
+     "Uncle Chipps",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Mother Dairy/0.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.7864538116479373
+    },
+    "top3": [
+     "Mother Dairy",
+     "Cadbury Dairy Milk",
+     "McDonald's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mother Dairy/1.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.32883672621307053
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Mother Dairy/2.jpg",
+    "truth": "Mother Dairy",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.2639802640053498
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Coca-Cola/0.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.2742968790833018
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Coca-Cola",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Coca-Cola/1.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.14541166833939903
+    },
+    "top3": [
+     "Coca-Cola",
+     "McDonald's",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Coca-Cola/2.jpg",
+    "truth": "Coca-Cola",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.158475481287781
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Red Bull",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/0.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.2711151298458546
+    },
+    "top3": [
+     "Pepsi",
+     "Unbranded / unreadable",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/1.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.39839636111823057
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Pepsi",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Pepsi/2.jpg",
+    "truth": "Pepsi",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.08490145190575071
+    },
+    "top3": [
+     "Coca-Cola",
+     "Paper Boat",
+     "Unbranded / unreadable"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/0.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.4872062943677782
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/1.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.4925028916524054
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Thums Up/2.jpg",
+    "truth": "Thums Up",
+    "guess": {
+     "name": "Cadbury Dairy Milk",
+     "score": 0.24119129109031728
+    },
+    "top3": [
+     "Cadbury Dairy Milk",
+     "Haldiram's",
+     "Sunfeast"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/0.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.11870960692418435
+    },
+    "top3": [
+     "Coca-Cola",
+     "Sprite",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Sprite/1.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.060877128710116205
+    },
+    "top3": [
+     "Haldiram's",
+     "Vimal",
+     "Zomato"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sprite/2.jpg",
+    "truth": "Sprite",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.13635121199269565
+    },
+    "top3": [
+     "Haldiram's",
+     "Kinley",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/0.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Fanta",
+     "score": 0.29025485588938077
+    },
+    "top3": [
+     "Fanta",
+     "Sprite",
+     "Pepsi"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Fanta/1.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.06148182093626979
+    },
+    "top3": [
+     "Frooti",
+     "Slice",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Fanta/2.jpg",
+    "truth": "Fanta",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.1465010767221334
+    },
+    "top3": [
+     "Gold Flake",
+     "Sprite",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Limca/0.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.33419952353035925
+    },
+    "top3": [
+     "Coca-Cola",
+     "Limca",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Limca/1.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Limca",
+     "score": 0.28377958304498924
+    },
+    "top3": [
+     "Limca",
+     "Pepsi",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Limca/2.jpg",
+    "truth": "Limca",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.48733257590521906
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/0.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.4261798615665428
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Mountain Dew",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/1.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Mountain Dew",
+     "score": 0.10726802923671966
+    },
+    "top3": [
+     "Mountain Dew",
+     "Sprite",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Mountain Dew/2.jpg",
+    "truth": "Mountain Dew",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.23004849216411166
+    },
+    "top3": [
+     "Gold Flake",
+     "Limca",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/0.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Sunfeast",
+     "score": 0.245285579987044
+    },
+    "top3": [
+     "Sunfeast",
+     "Zomato",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/1.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.15539325445375685
+    },
+    "top3": [
+     "Coca-Cola",
+     "Limca",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "7Up/2.jpg",
+    "truth": "7Up",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.3548550036675893
+    },
+    "top3": [
+     "Pepsi",
+     "Coca-Cola",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/0.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.29221230721764346
+    },
+    "top3": [
+     "Coca-Cola",
+     "Pepsi",
+     "Limca"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/1.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.1971785868072013
+    },
+    "top3": [
+     "Aquafina",
+     "Balaji",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Maaza/2.jpg",
+    "truth": "Maaza",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.47999836653333716
+    },
+    "top3": [
+     "Aquafina",
+     "Domino's",
+     "Tropicana"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/0.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.14042104337140307
+    },
+    "top3": [
+     "Pepsi",
+     "Coca-Cola",
+     "Frooti"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Frooti/1.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.1075735615153108
+    },
+    "top3": [
+     "Haldiram's",
+     "Uncle Chipps",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Frooti/2.jpg",
+    "truth": "Frooti",
+    "guess": {
+     "name": "Frooti",
+     "score": 0.19280499917722624
+    },
+    "top3": [
+     "Frooti",
+     "Fanta",
+     "Gold Flake"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Slice/0.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Coca-Cola",
+     "score": 0.10037264261649469
+    },
+    "top3": [
+     "Coca-Cola",
+     "Domino's",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/1.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.43994566095697707
+    },
+    "top3": [
+     "Paper Boat",
+     "Vimal",
+     "Swiggy"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Slice/2.jpg",
+    "truth": "Slice",
+    "guess": {
+     "name": "Slice",
+     "score": 0.07569968238590759
+    },
+    "top3": [
+     "Slice",
+     "Tropicana",
+     "Bisleri"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Bisleri/0.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.0864330061274388
+    },
+    "top3": [
+     "Britannia",
+     "Uncle Chipps",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bisleri/1.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.19632460789636128
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Mountain Dew"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Bisleri/2.jpg",
+    "truth": "Bisleri",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.2602915599556344
+    },
+    "top3": [
+     "Britannia",
+     "Mountain Dew",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/0.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "Kinley",
+     "score": 0.056900630651552035
+    },
+    "top3": [
+     "Kinley",
+     "Thums Up",
+     "Aquafina"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Kinley/1.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "7Up",
+     "score": 0.10792601877405088
+    },
+    "top3": [
+     "7Up",
+     "Bisleri",
+     "Red Bull"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Kinley/2.jpg",
+    "truth": "Kinley",
+    "guess": {
+     "name": "7Up",
+     "score": 0.07154741642813237
+    },
+    "top3": [
+     "7Up",
+     "Lay's",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Aquafina/0.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.261336464165584
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Paper Boat",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Aquafina/1.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.08637364549176824
+    },
+    "top3": [
+     "Britannia",
+     "Haldiram's",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Aquafina/2.jpg",
+    "truth": "Aquafina",
+    "guess": {
+     "name": "Aquafina",
+     "score": 0.8096248915947217
+    },
+    "top3": [
+     "Aquafina",
+     "Fanta",
+     "Limca"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/0.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.22502539230672958
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Coca-Cola",
+     "Pepsi"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Red Bull/1.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.17303191668840417
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Red Bull",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Red Bull/2.jpg",
+    "truth": "Red Bull",
+    "guess": {
+     "name": "Red Bull",
+     "score": 0.3443957036855276
+    },
+    "top3": [
+     "Red Bull",
+     "Pepsi",
+     "Bisleri"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Sting/0.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.06466980267103814
+    },
+    "top3": [
+     "Britannia",
+     "Vimal",
+     "Bisleri"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/1.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Parle-G",
+     "score": 0.12444224980797468
+    },
+    "top3": [
+     "Parle-G",
+     "Haldiram's",
+     "Lay's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Sting/2.jpg",
+    "truth": "Sting",
+    "guess": {
+     "name": "Sting",
+     "score": 0.12574690459938995
+    },
+    "top3": [
+     "Sting",
+     "Domino's",
+     "Lay's"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/0.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.9635828544271138
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "Mountain Dew"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/1.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.06414133516372397
+    },
+    "top3": [
+     "Paper Boat",
+     "Maggi",
+     "Zomato"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Paper Boat/2.jpg",
+    "truth": "Paper Boat",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.9833088420544686
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "Britannia"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Real/0.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Bisleri",
+     "score": 0.16106975478669935
+    },
+    "top3": [
+     "Bisleri",
+     "Domino's",
+     "7Up"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Real/1.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.2405241535357965
+    },
+    "top3": [
+     "Britannia",
+     "Balaji",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Real/2.jpg",
+    "truth": "Real",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.21113277355022103
+    },
+    "top3": [
+     "Britannia",
+     "Parle-G",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/0.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.1389700633885645
+    },
+    "top3": [
+     "McDonald's",
+     "Unbranded / unreadable",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/1.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.06316093447605436
+    },
+    "top3": [
+     "Balaji",
+     "McDonald's",
+     "Kinley"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Tropicana/2.jpg",
+    "truth": "Tropicana",
+    "guess": {
+     "name": "Tropicana",
+     "score": 0.09831717526826156
+    },
+    "top3": [
+     "Tropicana",
+     "McDonald's",
+     "Vimal"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/0.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.3060608389192165
+    },
+    "top3": [
+     "Britannia",
+     "Parle-G",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Gold Flake/1.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Gold Flake",
+     "score": 0.8664343358220925
+    },
+    "top3": [
+     "Gold Flake",
+     "Fanta",
+     "Slice"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Gold Flake/2.jpg",
+    "truth": "Gold Flake",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.29358645184996907
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Gold Flake"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Rajnigandha/0.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.133624212307177
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Rajnigandha/1.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Mother Dairy",
+     "score": 0.054127460688890724
+    },
+    "top3": [
+     "Mother Dairy",
+     "Vimal",
+     "Bisleri"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Rajnigandha/2.jpg",
+    "truth": "Rajnigandha",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.2677086420939754
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Vimal/0.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.44989798860298275
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Kurkure"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/1.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.20778553633356442
+    },
+    "top3": [
+     "Haldiram's",
+     "Limca",
+     "Balaji"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Vimal/2.jpg",
+    "truth": "Vimal",
+    "guess": {
+     "name": "Haldiram's",
+     "score": 0.45635204746678065
+    },
+    "top3": [
+     "Haldiram's",
+     "Balaji",
+     "Rajnigandha"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "McDonald's/0.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.8085815780770058
+    },
+    "top3": [
+     "McDonald's",
+     "Unbranded / unreadable",
+     "Paper Boat"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "McDonald's/1.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.37528316674566
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "McDonald's",
+     "Maggi"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "McDonald's/2.jpg",
+    "truth": "McDonald's",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.3854336158166907
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Pepsi",
+     "Sprite"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Domino's/0.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.42451817756267346
+    },
+    "top3": [
+     "Paper Boat",
+     "Britannia",
+     "Cadbury Dairy Milk"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Domino's/1.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.595312329210228
+    },
+    "top3": [
+     "Paper Boat",
+     "Domino's",
+     "McDonald's"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Domino's/2.jpg",
+    "truth": "Domino's",
+    "guess": {
+     "name": "Pepsi",
+     "score": 0.32042521866907714
+    },
+    "top3": [
+     "Pepsi",
+     "McDonald's",
+     "Slice"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/0.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.13571281036842492
+    },
+    "top3": [
+     "Balaji",
+     "Cadbury Dairy Milk",
+     "Haldiram's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/1.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Balaji",
+     "score": 0.10537337442271633
+    },
+    "top3": [
+     "Balaji",
+     "Haldiram's",
+     "Uncle Chipps"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Swiggy/2.jpg",
+    "truth": "Swiggy",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.1687610814794506
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Britannia",
+     "Domino's"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Zomato/0.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "McDonald's",
+     "score": 0.15710787476429727
+    },
+    "top3": [
+     "McDonald's",
+     "Zomato",
+     "Coca-Cola"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Zomato/1.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Unbranded / unreadable",
+     "score": 0.08335221804272547
+    },
+    "top3": [
+     "Unbranded / unreadable",
+     "Vimal",
+     "Sting"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Zomato/2.jpg",
+    "truth": "Zomato",
+    "guess": {
+     "name": "Britannia",
+     "score": 0.10291233442797425
+    },
+    "top3": [
+     "Britannia",
+     "Sunfeast",
+     "Vimal"
+    ],
+    "hit1": false,
+    "hit3": false
+   },
+   {
+    "file": "Starbucks/0.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Paper Boat",
+     "score": 0.2566584704564203
+    },
+    "top3": [
+     "Paper Boat",
+     "Unbranded / unreadable",
+     "Starbucks"
+    ],
+    "hit1": false,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/1.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.4723620114908139
+    },
+    "top3": [
+     "Starbucks",
+     "Parle-G",
+     "Unbranded / unreadable"
+    ],
+    "hit1": true,
+    "hit3": true
+   },
+   {
+    "file": "Starbucks/2.jpg",
+    "truth": "Starbucks",
+    "guess": {
+     "name": "Starbucks",
+     "score": 0.5963157598770309
+    },
+    "top3": [
+     "Starbucks",
+     "Unbranded / unreadable",
+     "Coca-Cola"
+    ],
+    "hit1": true,
+    "hit3": true
+   }
+  ]
+ }
+}
