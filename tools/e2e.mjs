@@ -13,10 +13,11 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const credits = JSON.parse(fs.readFileSync(path.join(imagesDir, 'credits.json'), 'utf8'));
 const dataURL = (f) => 'data:image/jpeg;base64,' + fs.readFileSync(path.join(imagesDir, f)).toString('base64');
 
+// The first config must be the app's default (ai.js DEFAULT_MODEL + all templates): its embeddings are shipped.
 const CONFIGS = [
-  { id: 'Xenova/clip-vit-base-patch32', templates: 'ensemble' },
-  { id: 'Xenova/clip-vit-base-patch32', templates: 'single' },
   { id: 'Xenova/clip-vit-base-patch16', templates: 'ensemble' },
+  { id: 'Xenova/clip-vit-base-patch16', templates: 'single' },
+  { id: 'Xenova/clip-vit-base-patch32', templates: 'ensemble' },
 ];
 
 async function evaluate(browser) {
@@ -53,6 +54,7 @@ async function evalConfig(browser, cfg, rows, perImage) {
   const row = {
     model: cfg.id, templates: cfg.templates, n,
     top1: top1 / n, top3: top3 / n, msPerPhoto: ms / n, setupS: (Date.now() - t0) / 1000, initMs: info.initMs,
+    visionMB: info.visionMB,
   };
   console.log(row);
   rows.push(row);
@@ -76,11 +78,11 @@ function writeResults(rows, perImage) {
   md += `Test set: ${credits.length} freely licensed Wikimedia Commons photos found by searching each brand name ` +
     `(${new Set(credits.map((c) => c.brand)).size} brands). Not all show litter, and some are noisy matches. Treat this as a smoke test, not a benchmark. ` +
     `Chance level for top-1 is about ${pct(1 / 42)}.\n\n`;
-  md += '| Model | Prompts | Top-1 | Top-3 | ms / photo (CI CPU) |\n|---|---|---|---|---|\n';
+  md += '| Model | Prompts | Top-1 | Top-3 | ms / photo (CI CPU) | Phone download |\n|---|---|---|---|---|---|\n';
   for (const r of rows) {
     md += r.error
-      ? `| \`${r.model}\` | ${r.templates} | failed: ${r.error} | | |\n`
-      : `| \`${r.model}\` | ${r.templates} | ${pct(r.top1)} | ${pct(r.top3)} | ${r.msPerPhoto.toFixed(0)} |\n`;
+      ? `| \`${r.model}\` | ${r.templates} | failed: ${r.error} | | | |\n`
+      : `| \`${r.model}\` | ${r.templates} | ${pct(r.top1)} | ${pct(r.top3)} | ${r.msPerPhoto.toFixed(0)} | ${r.visionMB.toFixed(0)} MB |\n`;
   }
   md += '\n## Per photo (default config)\n\n| Photo | Truth | AI top guess | In top 3? |\n|---|---|---|---|\n';
   for (const r of perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`] || []) {
@@ -108,6 +110,14 @@ async function caption(page, text) {
 
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 
+async function pickBrand(page, brand) {
+  const on = await page.locator('#brand-chips .chip.on').allTextContents();
+  if (on.some((t) => t.startsWith(brand))) return;
+  const chip = page.locator('#brand-chips .chip', { hasText: brand });
+  if (await chip.count()) await chip.first().click();
+  else await page.fill('#brand-other', brand);
+}
+
 async function snap(page, file, shotName) {
   await page.setInputFiles('#photo', path.join(imagesDir, file));
   await page.waitForSelector('#answer:not([hidden])', { timeout: 60000 });
@@ -132,7 +142,7 @@ async function demo(perImage) {
   let ctx = await chromium.launchPersistentContext(profile, { viewport });
   let page = ctx.pages()[0] || await ctx.newPage();
   await page.goto(base + '/');
-  await page.waitForSelector('#model-card[hidden]', { timeout: 300000 });
+  await page.waitForSelector('#model-card[hidden]', { state: 'attached', timeout: 300000 });
   await ctx.close();
 
   fs.mkdirSync(path.join(ROOT, 'media', 'screens'), { recursive: true });
@@ -144,7 +154,7 @@ async function demo(perImage) {
   page = ctx.pages()[0] || await ctx.newPage();
   await page.goto(base + '/');
   await caption(page, 'Kiska Kachra: whose trash is this? 🗑️');
-  await page.waitForSelector('#model-card[hidden]', { timeout: 120000 });
+  await page.waitForSelector('#model-card[hidden]', { state: 'attached', timeout: 120000 });
   await pause(1500);
   await caption(page, 'Go for a walk. Pick up litter. Snap it.');
   await pause(2200);
@@ -154,12 +164,14 @@ async function demo(perImage) {
   await snap(page, right[0].file, '2-guess.png');
   await pause(2600);
   await caption(page, `Recognised: ${right[0].truth}. Tap "Log it".`);
+  await pickBrand(page, right[0].truth);
   await pause(1600);
   await page.click('#log-btn');
   await pause(1200);
 
   await snap(page, right[1].file);
   await caption(page, `Another one: ${right[1].truth}.`);
+  await pickBrand(page, right[1].truth);
   await pause(2200);
   await page.click('#log-btn');
   await pause(1000);
@@ -168,9 +180,7 @@ async function demo(perImage) {
     await snap(page, wrong.file, '3-correct.png');
     await caption(page, `Wrong guess (${wrong.guess.name})? One tap fixes it. A human confirms every entry.`);
     await pause(2600);
-    const chip = page.locator('#brand-chips .chip', { hasText: wrong.truth });
-    if (await chip.count()) await chip.first().click();
-    else await page.fill('#brand-other', wrong.truth);
+    await pickBrand(page, wrong.truth);
     await pause(1400);
     await page.click('#log-btn');
     await pause(1000);
@@ -188,8 +198,9 @@ async function demo(perImage) {
   await ctx.setOffline(true);
   await page.reload();
   await caption(page, 'Airplane mode ✈️ It still works offline.');
-  await page.waitForSelector('#model-card[hidden]', { timeout: 60000 });
+  await page.waitForSelector('#model-card[hidden]', { state: 'attached', timeout: 60000 });
   await snap(page, right[0].file);
+  await pickBrand(page, right[0].truth);
   await pause(2000);
   await page.click('#log-btn');
   await pause(800);

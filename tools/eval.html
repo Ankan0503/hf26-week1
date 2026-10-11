@@ -12,7 +12,11 @@
     // seed: false so the eval always exercises the on-device text encoder too.
     window.rec = new Recognizer({ labels, modelId, seed: false });
     await window.rec.init();
-    return { initMs: performance.now() - t0, brands: labels.brands.length };
+    // What a phone downloads: the vision side only (text embeddings are shipped precomputed).
+    const visionBytes = Object.entries(window.rec.files)
+      .filter(([f]) => !/text_model|tokenizer|vocab|merges|special_tokens/.test(f))
+      .reduce((a, [, [, total]]) => a + total, 0);
+    return { initMs: performance.now() - t0, brands: labels.brands.length, visionMB: visionBytes / 1e6 };
   };
 
   window.classify = async (dataURL) => {

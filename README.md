@@ -22,7 +22,7 @@ Clean-up drives count kilos. Kilos don't tell anyone *whose* packaging keeps end
 
 | Piece | What |
 |---|---|
-| Model | [OpenAI CLIP ViT-B/32](https://huggingface.co/openai/clip-vit-base-patch32) (open weights, MIT), quantized ONNX port [`Xenova/clip-vit-base-patch32`](https://huggingface.co/Xenova/clip-vit-base-patch32) |
+| Model | [OpenAI CLIP ViT-B/16](https://huggingface.co/openai/clip-vit-base-patch16) (open weights, MIT), quantized ONNX port [`Xenova/clip-vit-base-patch16`](https://huggingface.co/Xenova/clip-vit-base-patch16). Picked over ViT-B/32 by the eval: about 2× the top-1 accuracy, same download size. |
 | Runtime | [Transformers.js](https://github.com/huggingface/transformers.js) 3.8.1 + ONNX Runtime Web (WASM), **vendored in `vendor/`**, so there's no CDN at runtime |
 | Recognition | Zero-shot. Each brand gets several prompt templates ("a crumpled {} wrapper"…) whose text embeddings are averaged. A photo is matched by cosine similarity to the class embeddings, then softmax at CLIP's temperature. |
 | Speed trick | Text embeddings are computed **once**. CI precomputes them for the built-in labels (`data/embeddings/`), so a phone downloads only the **vision** encoder, and each photo costs one vision pass. Brands you teach it are embedded on the device and cached. |

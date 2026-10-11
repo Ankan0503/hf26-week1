@@ -37,9 +37,9 @@ Plain HTML/CSS/JS, no build step, MIT licensed.
 
 ### One open-weight model, used zero-shot
 
-I didn't have a labelled dataset of crushed chips packets, and I wasn't going to build one in a week. So the AI is **OpenAI's CLIP ViT-B/32**, whose weights are open under MIT. I use the quantized ONNX port by Xenova and run it with **Transformers.js**. CLIP embeds images and text into the same space, which makes recognition a lookup:
+I didn't have a labelled dataset of crushed chips packets, and I wasn't going to build one in a week. So the AI is **OpenAI's CLIP** (ViT-B/16), whose weights are open under MIT. I use the quantized ONNX port by Xenova and run it with **Transformers.js**. I first used the smaller ViT-B/32. The eval below showed B/16 roughly doubles top-1 accuracy for the same download size, at about 3–4× the compute per photo, so I switched. CLIP embeds images and text into the same space, which makes recognition a lookup:
 
-- Every brand gets several prompt templates ("a crumpled {} wrapper", "{} packaging thrown on the ground"…). Their text embeddings are averaged into one vector per brand. Averaging prompts like this is a cheap, well-known way to make CLIP more reliable.
+- Every brand gets several prompt templates ("a photo of {} packaging", "the {} logo", "a crumpled {} wrapper, bottle or can"…). Their text embeddings are averaged into one vector per brand. Averaging prompts like this is a cheap, well-known way to make CLIP more reliable.
 - A photo goes through the vision encoder once. Cosine similarity against every brand vector, softmax at CLIP's own temperature, and you have a ranked guess.
 - A second set of vectors guesses the item type: chips packet, PET bottle, tetra pak, gutka sachet…
 

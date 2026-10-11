@@ -13,7 +13,8 @@ env.useBrowserCache = true;
 // Serve ONNX Runtime's WASM from this site instead of a CDN (works offline, no third party).
 env.backends.onnx.wasm.wasmPaths = new URL('./vendor/', import.meta.url).href;
 
-export const DEFAULT_MODEL = 'Xenova/clip-vit-base-patch32';
+// Chosen by eval/RESULTS.md: B/16 doubles top-1 accuracy over B/32 for the same download size.
+export const DEFAULT_MODEL = 'Xenova/clip-vit-base-patch16';
 export const NO_BRAND = 'Unbranded / unreadable';
 
 const CACHE_PREFIX = 'kk-emb-v1:';
