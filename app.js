@@ -32,10 +32,13 @@ function setStatus(text, pct) {
 }
 const mb = (b) => (b / 1e6).toFixed(0);
 
+let barPct = 0; // keep the bar monotonic: the total grows as new model files start downloading
 function onProgress(p) {
   if (p.phase === 'download') {
-    setStatus(`Downloading the open-weight AI model… ${mb(p.loaded)} / ${mb(p.total)} MB (one time only, use Wi-Fi)`,
-      (p.loaded / p.total) * 90);
+    barPct = Math.max(barPct, (p.loaded / p.total) * 90);
+    setStatus(p.total < 1e6
+      ? 'Downloading the open-weight AI model…'
+      : `Downloading the open-weight AI model… ${mb(p.loaded)} / ${mb(p.total)} MB (one time only, use Wi-Fi)`, barPct);
   } else if (p.phase === 'prompts') {
     setStatus(`Teaching the AI ${labels.brands.length} brands… ${p.done}/${p.of}`, 90 + (p.done / p.of) * 10);
   }

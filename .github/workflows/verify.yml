@@ -28,13 +28,14 @@ jobs:
           npm i --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
           sudo apt-get install -y ffmpeg >/dev/null
+      - name: Serve the app
+        run: (python3 -m http.server 8000 >/dev/null 2>&1 &) && sleep 1
+      - name: Logic tests (fake model, no download)
+        run: node tools/unit.mjs http://localhost:8000
       - name: Fetch test photos (Wikimedia Commons + Open Food Facts)
         run: python3 -u tools/fetch_images.py "$RUNNER_TEMP/images" 3
       - name: Eval + demo with the real model
-        run: |
-          python3 -m http.server 8000 >/dev/null 2>&1 &
-          sleep 1
-          node tools/e2e.mjs http://localhost:8000 "$RUNNER_TEMP/images" all
+        run: node tools/e2e.mjs http://localhost:8000 "$RUNNER_TEMP/images" all
       - name: Convert video
         run: |
           ffmpeg -y -loglevel error -i media/demo.webm -vf "fps=30" -c:v libx264 -pix_fmt yuv420p -movflags +faststart media/demo.mp4

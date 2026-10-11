@@ -39,7 +39,8 @@ label prompts ─► CLIP text encoder (once, or precomputed) ─► class vecto
 
 `.github/workflows/verify.yml` runs on every push. GitHub Actions does what a phone does:
 
-1. It downloads freely licensed brand photos from Wikimedia Commons (`tools/fetch_images.py`).
+0. It runs logic tests with a stand-in model (`tools/unit.mjs`): seeded embeddings skip the text model, offline start works, a taught brand can't block loading, and only changed labels are recomputed.
+1. It downloads freely licensed brand and product photos from Wikimedia Commons and Open Food Facts (`tools/fetch_images.py`).
 2. It runs the **same `ai.js`** in headless Chromium to measure top-1 and top-3 accuracy and speed for a few model and prompt configs, and writes [`eval/RESULTS.md`](eval/RESULTS.md).
 3. It writes the precomputed prompt embeddings.
 4. It drives the real app on a phone-sized screen and records [`media/demo.mp4`](media/demo.mp4): snap, guess, correct a wrong guess, teach a brand, go offline, share.
