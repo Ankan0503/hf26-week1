@@ -17,7 +17,9 @@ tags: devchallenge, hf26challenge
 
 Clean-up drives usually report kilos: "we removed 40 kg of waste." Kilos don't put pressure on anyone. "38% of what we picked up came from two snack brands" does. Brand audits already exist, but they run on clipboards and tally sheets. I wanted the clipboard to be the phone in your pocket, with the AI doing the squinting at logos.
 
-There's no indoor mode. The app is useless until you step outside and bend down.
+**Who it's for:** clean-up volunteers, plogging and run clubs, school eco-clubs, anyone who already picks up litter on a walk.
+
+**The screen is the shortest part.** Each piece of litter costs about five seconds of phone time: snap, glance, tap. The rest of the walk is eyes on the ground. There's no indoor mode: the app is useless until you step outside and bend down.
 
 ## Demo
 
@@ -56,7 +58,7 @@ Brands live in `data/labels.json`. Adding your city's brands is a one-line pull 
 
 ### Human in the loop, on purpose
 
-The AI never logs anything by itself. The top guesses appear as chips with confidence percentages. Below 50% nothing is pre-selected, and the app says plainly that it isn't sure. I picked that threshold from the eval's calibration table: above 50%, the pre-selected brand was right about 9 times in 10. At 35% it was only 7 in 10, and a wrong pre-selection that someone logs without looking corrupts the audit. The AI makes logging fast. The human keeps the data honest.
+The AI never logs anything by itself. The top guesses appear as chips with confidence percentages. Below 50% nothing is pre-selected, and the app says plainly that it isn't sure. I picked that threshold from the eval's calibration table: above 50%, the pre-selected brand was right 18 times out of 19. At 35% it was only 21 out of 30, and a wrong pre-selection that someone logs without looking corrupts the audit. The AI makes logging fast. The human keeps the data honest.
 
 ### Testing a phone AI without a phone
 
@@ -86,8 +88,14 @@ Test set: 122 freely licensed photos across 41 brands; chance level is about 2%.
 
 ## Why Does Open Innovation Matter?
 
-This project is a chain of things people gave away. OpenAI released CLIP's weights. Xenova converted them to ONNX. Hugging Face built Transformers.js so a browser tab can run them. Microsoft open-sourced ONNX Runtime. Wikimedia and Open Food Facts contributors photographed products under free licenses, which let me test the model honestly. Because of all that, someone with a phone and no GPU budget can ship an AI app that costs nothing to host, nothing per inference, and sends nothing to anyone's server.
+The open pieces aren't a nice-to-have here. They're the only reason this works at all.
 
-Openness matters even more here because the *data* is civic. A brand audit only persuades if people can check how it was counted. With an open model, an open label list, open code and a published eval, anyone can see exactly how "Lay's: 7" was produced, and anyone can add the brands littering *their* street with a one-line pull request.
+- **It works where litter is, with no signal.** The model runs in the browser tab. After the first load you can put the phone in airplane mode and keep logging. A closed vision API would need a connection for every single photo, in exactly the places (drains, empty lots, riverbanks) where there often isn't one.
+- **The photos stay on the phone.** People photograph trash on *their* streets, sometimes with houses, cars or faces in the frame. With an open model, nothing leaves the device. There's no server, no account, nothing to leak.
+- **It costs nothing to run, forever.** No API key, no per-image bill, no free tier to run out of. A clean-up drive with 200 volunteers snapping 50 items each is 10,000 inferences. With an open model that costs nothing, on hosting that's free (GitHub Pages).
+- **I could measure and swap models.** Because the weights are open, I could run my own eval in CI and pick the model on evidence. The smaller ViT-B/32 got 20% top-1. ViT-B/16 got 33% for the same 87 MB download, so I switched. I could also precompute the text side of the model so phones download half as much, and tune the confidence threshold from real calibration data. A closed API gives you none of those knobs.
+- **The audit is checkable.** A brand audit only persuades if people can check how it was counted. With an open model, an open label list, open code and a published eval, anyone can see exactly how "Lay's: 7" was produced, and anyone can add the brands littering *their* street with a one-line pull request.
+
+This whole thing is a chain of things people gave away: OpenAI's CLIP weights, Xenova's ONNX conversion, Hugging Face's Transformers.js, Microsoft's ONNX Runtime, and Wikimedia and Open Food Facts contributors' freely licensed photos that let me test it honestly.
 
 Thanks for reading. Now go pick something up. 🌳
