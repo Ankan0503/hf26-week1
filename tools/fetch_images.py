@@ -1,4 +1,8 @@
-"""Download freely licensed test photos from Wikimedia Commons, one folder per brand.
+"""Download freely licensed test photos, one folder per brand.
+
+Sources: Wikimedia Commons (search by brand name), then Open Food Facts product
+front photos (CC BY-SA, brand verified from the product's `brands` field) for
+brands that Commons didn't cover.
 
 Usage: python3 tools/fetch_images.py OUT_DIR [PER_BRAND]
 Writes OUT_DIR/<brand>/<n>.jpg and OUT_DIR/credits.json (title, author, license, url).
@@ -34,6 +38,20 @@ def search(query, limit=10):
     return pages
 
 
+OFF_SEARCH = "https://world.openfoodfacts.org/cgi/search.pl"
+
+
+def off_products(brand, limit=20):
+    q = {"search_terms": brand, "json": 1, "page_size": limit,
+         "fields": "code,product_name,brands,image_front_url"}
+    data = json.loads(get(OFF_SEARCH + "?" + urllib.parse.urlencode(q)))
+    key = re.sub(r"[^a-z0-9]", "", brand.lower())
+    for p in data.get("products", []):
+        brands = [re.sub(r"[^a-z0-9]", "", b.lower()) for b in (p.get("brands") or "").split(",")]
+        if p.get("image_front_url") and key in brands:
+            yield p
+
+
 def strip_html(s):
     return re.sub(r"<[^>]+>", "", s or "").strip()
 
@@ -55,7 +73,7 @@ def main():
             try:
                 pages = search(q)
             except Exception as e:  # network hiccup: skip this query
-                print("search failed", q, e)
+                print("search failed", q, e, flush=True)
                 continue
             for p in pages:
                 if got >= per or p["title"] in seen:
@@ -70,7 +88,7 @@ def main():
                 try:
                     blob = get(ii["thumburl"])
                 except Exception as e:
-                    print("download failed", p["title"], e)
+                    print("download failed", p["title"], e, flush=True)
                     continue
                 d = os.path.join(out, brand)
                 os.makedirs(d, exist_ok=True)
@@ -84,6 +102,30 @@ def main():
                 })
                 got += 1
             time.sleep(0.2)
+        if got < per and time.time() < deadline:
+            try:
+                for p in off_products(brand):
+                    if got >= per:
+                        break
+                    try:
+                        blob = get(p["image_front_url"])
+                    except Exception as e:
+                        print("download failed", p["code"], e, flush=True)
+                        continue
+                    d = os.path.join(out, brand)
+                    os.makedirs(d, exist_ok=True)
+                    path = os.path.join(d, f"{got}.jpg")
+                    open(path, "wb").write(blob)
+                    credits.append({
+                        "brand": brand, "file": os.path.relpath(path, out),
+                        "title": p.get("product_name") or p["code"],
+                        "author": "Open Food Facts contributors", "license": "CC BY-SA 3.0",
+                        "url": f"https://world.openfoodfacts.org/product/{p['code']}",
+                    })
+                    got += 1
+            except Exception as e:
+                print("off search failed", brand, e, flush=True)
+            time.sleep(6)  # Open Food Facts allows ~10 searches/minute
         print(f"{brand}: {got}", flush=True)
     json.dump(credits, open(os.path.join(out, "credits.json"), "w"), indent=1)
     print("total", len(credits))

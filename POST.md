@@ -1,5 +1,5 @@
 ---
-title: Kiska Kachra: an on-device AI that asks "whose trash is this?" while you pick it up
+title: Kiska Kachra: an open-weight AI in your phone's browser that asks "whose trash is this?"
 published: false
 tags: devchallenge, hf26challenge, ai, opensource
 ---
@@ -8,63 +8,82 @@ tags: devchallenge, hf26challenge, ai, opensource
 
 ## What I Built
 
-**Kiska Kachra** (किसका कचरा, Hindi for *"whose trash is this?"*) turns a litter pick-up walk into a brand audit.
+**Kiska Kachra** (किसका कचरा, Hindi for *"whose trash is this?"*) turns a litter pick-up walk into a **brand audit**.
 
 1. Go outside and pick up a piece of litter.
-2. Snap it. An AI **running inside your phone's browser** guesses the brand (Lay's? Bisleri? Kurkure?) and the item type.
-3. Confirm or correct the guess with one tap and log it.
-4. At the end of the walk you have a ranked list of *who* is littering your street, ready to share or export as CSV.
+2. Snap it. An open-weight AI model **running inside your phone's browser** guesses the brand (Lay's? Bisleri? Kurkure?) and the item type.
+3. Confirm or correct the guess with one tap, and it's logged.
+4. When you get home, you have a ranked list of *who* is littering your street, ready to share or export as CSV.
 
-Every clean-up drive I've seen reports kilos: "we removed 40 kg of waste." Kilos don't put pressure on anyone. "38% of what we picked up was from two snack brands" does. Groups like Break Free From Plastic run brand audits with clipboards and tally sheets. I wanted that clipboard to be the phone in your pocket, with the AI doing the squinting at logos.
+Clean-up drives usually report kilos: "we removed 40 kg of waste." Kilos don't put pressure on anyone. "38% of what we picked up came from two snack brands" does. Brand audits already exist, but they run on clipboards and tally sheets. I wanted the clipboard to be the phone in your pocket, with the AI doing the squinting at logos.
 
-There's no "indoor mode." The app is useless until you step outside and bend down.
+There's no indoor mode. The app is useless until you step outside and bend down.
 
 ## Demo
 
-**Live app:** https://ankan0503.github.io/hf26-week1/
+**Live app:** https://ankan0503.github.io/hf26-week1/ (open it on your phone)
 
-<!-- TODO: add a screenshot or short screen recording from your phone here -->
+DEMO_MEDIA
 
-Open it on your phone, let the model download once (about 90 MB, use Wi-Fi), then switch to airplane mode. It still works.
+The demo isn't staged by hand. GitHub Actions recorded it while driving the real app with the real model on a phone-sized screen: snap, guess, fix a wrong guess, teach it a new brand, switch to airplane mode, and share.
 
 ## Code
 
 {% github Ankan0503/hf26-week1 %}
 
-Plain HTML/CSS/JS, no build step, MIT licensed. About 300 lines of app code.
+Plain HTML/CSS/JS, no build step, MIT licensed.
 
 ## How I Built It
 
-**The model: CLIP, zero-shot.** I didn't have a labelled dataset of crushed chips packets, and I wasn't going to make one in a week. So I used OpenAI's [CLIP ViT-B/32](https://huggingface.co/openai/clip-vit-base-patch32), which scores an image against arbitrary text. Each photo is scored against prompts like `a photo of a Lay's logo on litter` for about 45 brands that turn up in Indian litter, plus `a photo of plain litter with no brand or logo`. A second pass scores the item type: chips packet, PET bottle, tetra pak, gutka sachet, and so on. Adding a brand means adding one string. No retraining.
+### One open-weight model, used zero-shot
 
-**The runtime: Transformers.js in the browser.** The quantized ONNX port ([`Xenova/clip-vit-base-patch32`](https://huggingface.co/Xenova/clip-vit-base-patch32)) runs through [Transformers.js](https://github.com/huggingface/transformers.js) on ONNX Runtime Web (WASM). I tried to keep it light:
+I didn't have a labelled dataset of crushed chips packets, and I wasn't going to build one in a week. So the AI is **OpenAI's CLIP ViT-B/32**, whose weights are open under MIT. I use the quantized ONNX port by Xenova and run it with **Transformers.js**. CLIP embeds images and text into the same space, which makes recognition a lookup:
 
-- Photos are downscaled to 448 px on a canvas before inference. CLIP only looks at 224 px, and phone photos are 12 MP.
-- I chose q8 on WASM over WebGPU. The WebGPU path wants fp32 weights, which are several times larger, and support on budget Android phones is patchy. A model that loads on *every* phone beats a fast one that loads on some.
-- A service worker caches the app and the pinned library files, and Transformers.js caches the weights. After the first visit it works offline, which matters because the best litter is never where the signal is.
+- Every brand gets several prompt templates ("a crumpled {} wrapper", "{} packaging thrown on the ground"…). Their text embeddings are averaged into one vector per brand. Averaging prompts like this is a cheap, well-known way to make CLIP more reliable.
+- A photo goes through the vision encoder once. Cosine similarity against every brand vector, softmax at CLIP's own temperature, and you have a ranked guess.
+- A second set of vectors guesses the item type: chips packet, PET bottle, tetra pak, gutka sachet…
 
-**Human in the loop, on purpose.** The AI never logs anything by itself. It shows its top guesses as chips with confidence percentages, and you tap to confirm, pick another, or type a brand it doesn't know. The AI makes the job fast. The human keeps the data honest.
+Brands live in `data/labels.json`. Adding your city's brands is a one-line pull request.
 
-**Privacy.** Photos never leave the device. The only thing stored is `{time, brand, item}` in `localStorage`. There are no accounts and no server.
+### Making it phone-friendly
+
+- **Text embeddings are precomputed.** CI computes the vectors for the built-in labels and ships them as a small JSON file. A phone downloads only the CLIP **vision** encoder, not the text one, and each photo costs exactly one forward pass.
+- **Teach it a brand.** If you type a brand it doesn't know, the text encoder is fetched lazily and the new brand is embedded on the device and cached, so next time it's one of the suggestions.
+- **No CDN at runtime.** Transformers.js and the ONNX Runtime WASM are vendored into the repo and served by GitHub Pages. A service worker caches the app, Transformers.js caches the weights, and embeddings sit in `localStorage`. After the first load it works in airplane mode, which matters because the best litter is never where the signal is.
+- **Photos never leave the phone.** They're downscaled on a canvas, embedded, and thrown away. The only thing stored is `{time, brand, item}`.
+
+### Human in the loop, on purpose
+
+The AI never logs anything by itself. The top guesses appear as chips with confidence percentages. Below 35% nothing is pre-selected, and the app says plainly that it isn't sure. The AI makes logging fast. The human keeps the data honest.
+
+### Testing a phone AI without a phone
+
+I built this from a cloud sandbox while away from my laptop, so the real test had to be automated. On every push, a GitHub Actions workflow:
+
+1. downloads freely licensed product and brand photos from Wikimedia Commons and Open Food Facts,
+2. runs the **same `ai.js` the app uses** in headless Chromium and measures accuracy and speed for a few model and prompt configs,
+3. writes the precomputed embeddings,
+4. drives the real app on a phone-sized screen and records the demo video above.
+
+EVAL_TABLE
 
 ### What it can't do (yet)
 
-- **CLIP reads logos by vibe, not by text.** Big, iconic packaging (Coca-Cola red, Lay's yellow) gets recognised well. A sun-bleached, muddy, regional-brand wrapper often doesn't. The confirm step exists because of this.
-- **The brand list is hard-coded.** Anything not on it has to be typed by hand. An OCR pass would help.
-- **It's one person's tally.** There's no shared map or city leaderboard yet. That's the obvious next step, and the hard part is doing it without collecting people's locations carelessly.
-- **The first load is heavy.** About 90 MB is a lot on a prepaid data pack.
-- **Speed:** roughly 1–4 seconds per photo on CPU. Fine for a walk, not for a conveyor belt.
+- **CLIP reads logos by looks, not by text.** Big, iconic packaging is recognised well. A sun-bleached, muddy, regional-brand wrapper often isn't. The confirm step exists because of this.
+- **The first load is heavy** (the vision encoder). Do it on Wi-Fi. The app shows the exact size while it downloads.
+- **Single-threaded WASM.** GitHub Pages can't send the headers multi-threading needs.
+- **It's one person's tally.** There's no shared map or city leaderboard yet. That's the obvious next step, and the hard part is doing it without carelessly collecting where people walk.
 
 ## Why Does Open Innovation Matter?
 
-None of this would exist as a weekend project without open work. OpenAI released CLIP's weights under MIT. Xenova converted them to ONNX. Hugging Face made Transformers.js so a browser tab can run them. Everyone in that chain gave something away, and the result is that a student with a phone and no GPU budget can ship an AI app that costs nothing to host and nothing per inference.
+This project is a chain of things people gave away. OpenAI released CLIP's weights. Xenova converted them to ONNX. Hugging Face built Transformers.js so a browser tab can run them. Microsoft open-sourced ONNX Runtime. Wikimedia and Open Food Facts contributors photographed products under free licenses, which let me test the model honestly. Because of all that, someone with a phone and no GPU budget can ship an AI app that costs nothing to host, nothing per inference, and sends nothing to anyone's server.
 
-Open source matters even more here because the *data* is civic. Brand audit numbers are only persuasive if people can check how they were counted. With an open model, an open prompt list, and open code, anyone can see exactly how "Lay's: 7" was produced, and anyone can add the brands that litter *their* street with a one-line pull request.
+Openness matters even more here because the *data* is civic. A brand audit only persuades if people can check how it was counted. With an open model, an open label list, open code and a published eval, anyone can see exactly how "Lay's: 7" was produced, and anyone can add the brands littering *their* street with a one-line pull request.
 
 ## Prize Categories
 
 <!-- Edit to match the prize categories listed on the challenge page -->
-- **Best use of Hugging Face / Transformers.js:** the whole AI runs in-browser via Transformers.js.
+- **Best use of open-weight models / Hugging Face:** CLIP via Transformers.js, fully on-device.
 - **Overall Touch Grass:** it only works outside, with your hands dirty.
 
 Thanks for reading. Now go pick something up. 🌳
