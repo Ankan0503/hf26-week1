@@ -1,6 +1,8 @@
 // Kiska Kachra: whose trash is this?
 // UI + storage. The AI lives in ai.js and runs entirely in this browser.
 
+import { shrink } from './image.js';
+
 const STORE_KEY = 'kiska-kachra-v1';
 // Below this probability the AI's top guess is not pre-selected; the user picks.
 const CONFIDENT = 0.35;
@@ -95,23 +97,6 @@ function enableSnap() {
 }
 $('snap').addEventListener('click', () => $('photo').click());
 $('pick').addEventListener('click', () => $('gallery').click());
-
-// Downscale the photo: CLIP looks at 224px; phone photos are 12 MP.
-async function shrink(file) {
-  const bmp = await createImageBitmap(file).catch(() => null);
-  const src = bmp || await new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error('could not read that photo'));
-    img.src = URL.createObjectURL(file);
-  });
-  const s = Math.min(1, 512 / Math.max(src.width, src.height));
-  const c = document.createElement('canvas');
-  c.width = Math.round(src.width * s);
-  c.height = Math.round(src.height * s);
-  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
-  return c.toDataURL('image/jpeg', 0.9);
-}
 
 // ---------- UI ----------
 function renderChips(el, options, key) {

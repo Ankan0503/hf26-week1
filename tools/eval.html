@@ -4,6 +4,7 @@
 <!-- Loaded by tools/e2e.mjs. Runs the exact recognizer the app uses. -->
 <script type="module">
   import { Recognizer } from '../ai.js';
+  import { shrink } from '../image.js';
 
   window.setup = async (modelId, templates) => {
     const labels = await (await fetch('../data/labels.json')).json();
@@ -20,7 +21,9 @@
   };
 
   window.classify = async (dataURL) => {
-    const r = await window.rec.classify(dataURL);
+    // Same preprocessing as the app (image.js), so eval numbers match what users get.
+    const small = await shrink(await (await fetch(dataURL)).blob());
+    const r = await window.rec.classify(small);
     return { brands: r.brands.slice(0, 5), items: r.items.slice(0, 3), ms: r.ms };
   };
   window.exportEmbeddings = () => window.rec.exportEmbeddings();

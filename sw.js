@@ -1,8 +1,8 @@
 // Offline support for the app shell and the vendored AI runtime.
 // Model weights are cached separately by Transformers.js (Cache API, "transformers-cache").
-const CACHE = 'kiska-kachra-v2';
+const CACHE = 'kiska-kachra-v3';
 const SHELL = [
-  './', 'index.html', 'style.css', 'app.js', 'ai.js', 'data/labels.json', 'manifest.json', 'icon.svg',
+  './', 'index.html', 'style.css', 'app.js', 'ai.js', 'image.js', 'data/labels.json', 'manifest.json', 'icon.svg',
   'vendor/transformers.min.js', 'vendor/ort-wasm-simd-threaded.jsep.mjs', 'vendor/ort-wasm-simd-threaded.jsep.wasm',
 ];
 

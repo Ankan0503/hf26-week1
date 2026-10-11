@@ -53,7 +53,80 @@ def off_products(brand, limit=20):
 
 
 def strip_html(s):
-    return re.sub(r"<[^>]+>", "", s or "").strip()
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s or "")).strip()
+    half = len(t) // 2
+    if len(t) % 2 == 0 and t[:half] == t[half:]:  # "NameName" from nested spans
+        t = t[:half]
+    if len(t) % 2 == 1 and t[:half] == t[half + 1:]:  # "Name Name"
+        t = t[:half]
+    return t
+
+
+DEMO_ONLY = ["Snickers"]
+
+
+def fetch_brand(brand, per, out, folder, credits, deadline, demo=False):
+    got, seen = 0, set()
+    for q in (f'"{brand}" litter', f'"{brand}" can OR bottle OR packet OR wrapper', f'"{brand}"'):
+        if got >= per:
+            break
+        try:
+            pages = search(q)
+        except Exception as e:  # network hiccup: skip this query
+            print("search failed", q, e, flush=True)
+            continue
+        for p in pages:
+            if got >= per or p["title"] in seen:
+                continue
+            seen.add(p["title"])
+            if re.search(r"logo|wordmark|icon|map|graph|chart", p["title"], re.I):
+                continue
+            ii = (p.get("imageinfo") or [{}])[0]
+            if ii.get("mime") not in ("image/jpeg", "image/png"):
+                continue
+            meta = ii.get("extmetadata", {})
+            try:
+                blob = get(ii["thumburl"])
+            except Exception as e:
+                print("download failed", p["title"], e, flush=True)
+                continue
+            d = os.path.join(out, folder)
+            os.makedirs(d, exist_ok=True)
+            path = os.path.join(d, f"{got}.jpg")
+            open(path, "wb").write(blob)
+            credits.append({
+                "brand": brand, "file": os.path.relpath(path, out), "title": p["title"], "source": "commons", "demo": demo,
+                "author": strip_html(meta.get("Artist", {}).get("value")),
+                "license": strip_html(meta.get("LicenseShortName", {}).get("value")),
+                "url": ii.get("descriptionurl"),
+            })
+            got += 1
+        time.sleep(0.2)
+    if got < per and time.time() < deadline:
+        try:
+            for p in off_products(brand):
+                if got >= per:
+                    break
+                try:
+                    blob = get(p["image_front_url"])
+                except Exception as e:
+                    print("download failed", p["code"], e, flush=True)
+                    continue
+                d = os.path.join(out, folder)
+                os.makedirs(d, exist_ok=True)
+                path = os.path.join(d, f"{got}.jpg")
+                open(path, "wb").write(blob)
+                credits.append({
+                    "brand": brand, "file": os.path.relpath(path, out), "source": "off", "demo": demo,
+                    "title": p.get("product_name") or p["code"],
+                    "author": "Open Food Facts contributors", "license": "CC BY-SA 3.0",
+                    "url": f"https://world.openfoodfacts.org/product/{p['code']}",
+                })
+                got += 1
+        except Exception as e:
+            print("off search failed", brand, e, flush=True)
+        time.sleep(6)  # Open Food Facts allows ~10 searches/minute
+    print(f"{brand}: {got}", flush=True)
 
 
 def main():
@@ -66,67 +139,10 @@ def main():
         if time.time() > deadline:
             print("time budget used up; continuing with what we have", flush=True)
             break
-        got, seen = 0, set()
-        for q in (f'"{brand}" litter', f'"{brand}" can OR bottle OR packet OR wrapper', f'"{brand}"'):
-            if got >= per:
-                break
-            try:
-                pages = search(q)
-            except Exception as e:  # network hiccup: skip this query
-                print("search failed", q, e, flush=True)
-                continue
-            for p in pages:
-                if got >= per or p["title"] in seen:
-                    continue
-                seen.add(p["title"])
-                if re.search(r"logo|wordmark|icon|map|graph|chart", p["title"], re.I):
-                    continue
-                ii = (p.get("imageinfo") or [{}])[0]
-                if ii.get("mime") not in ("image/jpeg", "image/png"):
-                    continue
-                meta = ii.get("extmetadata", {})
-                try:
-                    blob = get(ii["thumburl"])
-                except Exception as e:
-                    print("download failed", p["title"], e, flush=True)
-                    continue
-                d = os.path.join(out, brand)
-                os.makedirs(d, exist_ok=True)
-                path = os.path.join(d, f"{got}.jpg")
-                open(path, "wb").write(blob)
-                credits.append({
-                    "brand": brand, "file": os.path.relpath(path, out), "title": p["title"],
-                    "author": strip_html(meta.get("Artist", {}).get("value")),
-                    "license": strip_html(meta.get("LicenseShortName", {}).get("value")),
-                    "url": ii.get("descriptionurl"),
-                })
-                got += 1
-            time.sleep(0.2)
-        if got < per and time.time() < deadline:
-            try:
-                for p in off_products(brand):
-                    if got >= per:
-                        break
-                    try:
-                        blob = get(p["image_front_url"])
-                    except Exception as e:
-                        print("download failed", p["code"], e, flush=True)
-                        continue
-                    d = os.path.join(out, brand)
-                    os.makedirs(d, exist_ok=True)
-                    path = os.path.join(d, f"{got}.jpg")
-                    open(path, "wb").write(blob)
-                    credits.append({
-                        "brand": brand, "file": os.path.relpath(path, out),
-                        "title": p.get("product_name") or p["code"],
-                        "author": "Open Food Facts contributors", "license": "CC BY-SA 3.0",
-                        "url": f"https://world.openfoodfacts.org/product/{p['code']}",
-                    })
-                    got += 1
-            except Exception as e:
-                print("off search failed", brand, e, flush=True)
-            time.sleep(6)  # Open Food Facts allows ~10 searches/minute
-        print(f"{brand}: {got}", flush=True)
+        fetch_brand(brand, per, out, brand, credits, deadline)
+    # Brands deliberately NOT in labels.json: the demo uses them to show teaching the AI a new brand.
+    for brand in DEMO_ONLY:
+        fetch_brand(brand, 2, out, os.path.join("_demo", brand), credits, time.time() + 120, demo=True)
     json.dump(credits, open(os.path.join(out, "credits.json"), "w"), indent=1)
     print("total", len(credits))
 
