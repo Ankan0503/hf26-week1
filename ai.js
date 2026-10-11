@@ -53,10 +53,12 @@ export class Recognizer {
    * @param {string} [o.modelId]
    * @param {(p:{phase:string, loaded?:number, total?:number, done?:number, of?:number}) => void} [o.onProgress]
    */
-  constructor({ labels, modelId = DEFAULT_MODEL, onProgress = () => {} }) {
+  constructor({ labels, modelId = DEFAULT_MODEL, onProgress = () => {}, seed = true }) {
     this.labels = labels;
     this.modelId = modelId;
     this.onProgress = onProgress;
+    this.seed = seed;
+    this.seeded = new Map(); // cacheKey -> embedding, from data/embeddings/<model>.json
     this.files = {};
     this.classes = { brand: [], item: [] }; // [{ name, emb }]
     this.logitScale = 100; // CLIP's learned temperature
@@ -112,11 +114,19 @@ export class Recognizer {
     const missing = [];
     for (const [kind, name] of pairs) {
       if (this.classes[kind].some((c) => c.name === name)) continue;
+      const key = this._cacheKey(kind, name);
       let emb = null;
       try {
-        const hit = localStorage.getItem(this._cacheKey(kind, name));
+        const hit = localStorage.getItem(key);
         if (hit) emb = new Float32Array(JSON.parse(hit));
-      } catch {}
+        else if (this.seeded.has(key)) {
+          emb = new Float32Array(this.seeded.get(key));
+          // Keep a local copy so the app still starts offline even if the seed file isn't cached.
+          localStorage.setItem(key, JSON.stringify(this.seeded.get(key)));
+        }
+      } catch {
+        if (!emb && this.seeded.has(key)) emb = new Float32Array(this.seeded.get(key));
+      }
       if (emb) this.classes[kind].push({ name, emb });
       else missing.push([kind, name]);
     }
@@ -137,17 +147,42 @@ export class Recognizer {
     }
   }
 
+  /** Text embeddings precomputed in CI for the built-in labels: the phone then
+   *  only downloads the vision model. Stale or missing entries are computed here. */
+  async _loadSeed() {
+    if (!this.seed) return;
+    try {
+      const file = this.modelId.replace(/[^\w.-]+/g, '_') + '.json';
+      const res = await fetch(new URL(`./data/embeddings/${file}`, import.meta.url));
+      if (!res.ok) return;
+      for (const [k, v] of Object.entries(await res.json())) this.seeded.set(k, v);
+    } catch {}
+  }
+
+  /** Embeddings of all built-in labels, keyed like the cache (used by CI to write the seed file). */
+  exportEmbeddings() {
+    const out = {};
+    for (const kind of ['brand', 'item']) {
+      for (const c of this.classes[kind]) out[this._cacheKey(kind, c.name)] = Array.from(c.emb, (x) => +x.toFixed(5));
+    }
+    return out;
+  }
+
   async init(extraBrands = []) {
     const opts = { progress_callback: this._fileProgress };
     [this.processor, this.visionModel] = await Promise.all([
       AutoProcessor.from_pretrained(this.modelId, opts),
       CLIPVisionModelWithProjection.from_pretrained(this.modelId, { ...opts, dtype: 'q8' }),
+      this._loadSeed(),
     ]);
-    const brands = [...new Set([...this.labels.brands, ...extraBrands, NO_BRAND])];
     await this._ensureClasses([
-      ...brands.map((b) => ['brand', b]),
+      ...[...this.labels.brands, NO_BRAND].map((b) => ['brand', b]),
       ...this.labels.items.map(([n]) => ['item', n]),
     ]);
+    // Brands the user taught it: nice to have, never a reason to fail (e.g. offline).
+    for (const b of extraBrands) {
+      try { await this._ensureClasses([['brand', b]]); } catch (e) { console.warn('could not learn', b, e); }
+    }
     this.onProgress({ phase: 'ready' });
   }
 

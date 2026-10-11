@@ -46,6 +46,14 @@ async function evaluate(browser) {
     console.log(row);
     rows.push(row);
     perImage[`${cfg.id}|${cfg.templates}`] = results;
+    if (cfg === CONFIGS[0]) {
+      // Ship the default model's text embeddings so phones skip the text-model download.
+      const emb = await page.evaluate(() => window.exportEmbeddings());
+      const dir = path.join(ROOT, 'data', 'embeddings');
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, cfg.id.replace(/[^\w.-]+/g, '_') + '.json'), JSON.stringify(emb));
+      console.log('wrote embeddings for', Object.keys(emb).length, 'labels');
+    }
     await page.close();
   }
   fs.mkdirSync(path.join(ROOT, 'eval'), { recursive: true });

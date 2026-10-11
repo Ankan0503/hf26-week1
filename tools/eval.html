@@ -9,7 +9,8 @@
     const labels = await (await fetch('../data/labels.json')).json();
     if (templates === 'single') labels.brandPrompts = labels.brandPrompts.slice(0, 1);
     const t0 = performance.now();
-    window.rec = new Recognizer({ labels, modelId });
+    // seed: false so the eval always exercises the on-device text encoder too.
+    window.rec = new Recognizer({ labels, modelId, seed: false });
     await window.rec.init();
     return { initMs: performance.now() - t0, brands: labels.brands.length };
   };
@@ -18,5 +19,6 @@
     const r = await window.rec.classify(dataURL);
     return { brands: r.brands.slice(0, 5), items: r.items.slice(0, 3), ms: r.ms };
   };
+  window.exportEmbeddings = () => window.rec.exportEmbeddings();
   window.harnessReady = true;
 </script>

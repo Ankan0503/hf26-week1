@@ -79,13 +79,19 @@ async function loadModel() {
   }
   enableSnap();
   try { navigator.storage?.persist?.(); } catch {}
+  // Registered after the model loads so the offline precache reuses files the
+  // browser just downloaded instead of fetching the 21 MB runtime a second time.
+  if ('serviceWorker' in navigator && !mock) {
+    navigator.serviceWorker.register('sw.js').catch((e) => console.warn('Service worker failed', e));
+  }
 }
 
 function enableSnap() {
-  $('snap').classList.remove('disabled');
-  $('snap').removeAttribute('aria-disabled');
-  $('photo').disabled = false;
+  $('snap').disabled = false;
+  $('pick').disabled = false;
 }
+$('snap').addEventListener('click', () => $('photo').click());
+$('pick').addEventListener('click', () => $('gallery').click());
 
 // Downscale the photo: CLIP looks at 224px; phone photos are 12 MP.
 async function shrink(file) {
@@ -126,7 +132,7 @@ function renderChips(el, options, key) {
   }
 }
 
-$('photo').addEventListener('change', async (ev) => {
+async function onPhoto(ev) {
   const file = ev.target.files[0];
   ev.target.value = '';
   if (!file) return;
@@ -167,7 +173,9 @@ $('photo').addEventListener('change', async (ev) => {
   renderChips($('item-chips'), itemOpts, 'item');
   $('brand-other').value = '';
   $('answer').hidden = false;
-});
+}
+$('photo').addEventListener('change', onPhoto);
+$('gallery').addEventListener('change', onPhoto);
 
 $('brand-other').addEventListener('input', (e) => {
   const v = e.target.value.trim().replace(/\s+/g, ' ');
@@ -191,7 +199,9 @@ $('log-btn').addEventListener('click', async () => {
     else {
       state.customBrands.push(brand);
       // Teach the AI the new brand so it can suggest it next time.
-      recognizer?.addBrand(brand).then(() => toast(`The AI now knows "${brand}" too.`)).catch(console.error);
+      recognizer?.addBrand(brand)
+        .then(() => toast(`The AI now knows "${brand}" too.`))
+        .catch(() => toast(`Saved. The AI will learn "${brand}" next time you're online.`));
     }
   }
   state.entries.push({ t: new Date().toISOString(), brand, item: current.item || 'other' });
@@ -295,6 +305,3 @@ $('csv-btn').addEventListener('click', () => {
   loadModel();
 })();
 
-if ('serviceWorker' in navigator && !mock) {
-  navigator.serviceWorker.register('sw.js').catch((e) => console.warn('Service worker failed', e));
-}

@@ -23,11 +23,13 @@
   </section>
 
   <section class="card">
-    <label id="snap" class="big-btn disabled" aria-disabled="true">
-      📷 Snap a piece of litter
-      <input id="photo" type="file" accept="image/*" capture="environment" disabled hidden>
-    </label>
-    <p class="hint">Hold the brand/logo towards the camera. Pick it up first, then snap it in your gloved hand.</p>
+    <div class="snap-row">
+      <button id="snap" class="big-btn" type="button" disabled>📷 Snap a piece of litter</button>
+      <button id="pick" class="btn" type="button" disabled aria-label="Choose a photo from the gallery">🖼️</button>
+    </div>
+    <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+    <input id="gallery" type="file" accept="image/*" hidden>
+    <p class="hint">Pick it up first, then snap it with the logo facing the camera. 🖼️ uses a photo you already took.</p>
   </section>
 
   <section id="result" class="card" hidden>
