@@ -89,6 +89,15 @@ function writeResults(rows, perImage) {
       ? `| \`${r.model}\` | ${r.templates} | failed: ${r.error} | | | |\n`
       : `| \`${r.model}\` | ${r.templates} | ${pct(r.top1)} | ${pct(r.top3)} | ${r.msPerPhoto.toFixed(0)} | ${r.visionMB.toFixed(0)} MB |\n`;
   }
+  const def = perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`] || [];
+  if (def.length) {
+    md += '\n## Calibration (default config)\n\nThe app pre-selects the top brand only above a confidence threshold (`CONFIDENT` in `app.js`). ' +
+      'How often is the pre-selected brand right?\n\n| Threshold | Photos pre-selected | Right when pre-selected |\n|---|---|---|\n';
+    for (const th of [0.25, 0.35, 0.5, 0.6]) {
+      const sel = def.filter((r) => r.guess.score >= th);
+      md += `| ${th} | ${pct(sel.length / def.length)} | ${sel.length ? pct(sel.filter((r) => r.hit1).length / sel.length) : 'n/a'} |\n`;
+    }
+  }
   md += '\n## Per photo (default config)\n\n| Photo | Truth | AI top guess | In top 3? |\n|---|---|---|---|\n';
   for (const r of perImage[`${CONFIGS[0].id}|${CONFIGS[0].templates}`] || []) {
     md += `| ${r.file} | ${r.truth} | ${r.guess.name} (${pct(r.guess.score)}) | ${r.hit3 ? '✅' : '❌'} |\n`;

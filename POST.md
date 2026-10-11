@@ -54,7 +54,7 @@ Brands live in `data/labels.json`. Adding your city's brands is a one-line pull 
 
 ### Human in the loop, on purpose
 
-The AI never logs anything by itself. The top guesses appear as chips with confidence percentages. Below 35% nothing is pre-selected, and the app says plainly that it isn't sure. The AI makes logging fast. The human keeps the data honest.
+The AI never logs anything by itself. The top guesses appear as chips with confidence percentages. Below 50% nothing is pre-selected, and the app says plainly that it isn't sure. I picked that threshold from the eval's calibration table: above 50%, the pre-selected brand was right about 9 times in 10. At 35% it was only 7 in 10, and a wrong pre-selection that someone logs without looking corrupts the audit. The AI makes logging fast. The human keeps the data honest.
 
 ### Testing a phone AI without a phone
 

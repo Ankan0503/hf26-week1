@@ -13,7 +13,7 @@ Clean-up drives count kilos. Kilos don't tell anyone *whose* packaging keeps end
 ## What it does
 
 - **📷 Snap or 🖼️ pick a photo.** The AI ranks about 40 brands that are common in Indian litter, plus "unbranded", and guesses the item type (chips packet, PET bottle, gutka sachet…).
-- **A human confirms every entry.** The top guesses appear as chips with confidence scores. Below 35% confidence nothing is pre-selected, so you choose.
+- **A human confirms every entry.** The top guesses appear as chips with confidence scores. Below 50% confidence nothing is pre-selected, so you choose. The threshold comes from the calibration table in the eval: above it, the pre-selected brand was right about 9 times in 10.
 - **Teach it a brand.** Type a brand that isn't listed. It's logged, and the AI embeds the new name on the device so it can suggest it next time.
 - **Brand audit.** You get a live ranking with counts and percentages, a share text, a CSV export, and per-entry delete.
 - **Offline after the first load.** Photos never leave the phone, and there are no accounts and no server.

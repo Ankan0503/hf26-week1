@@ -5,7 +5,9 @@ import { shrink } from './image.js';
 
 const STORE_KEY = 'kiska-kachra-v1';
 // Below this probability the AI's top guess is not pre-selected; the user picks.
-const CONFIDENT = 0.35;
+// Chosen from the calibration table in eval/RESULTS.md: at 0.5 a pre-selected
+// brand was right about 9 times in 10 (at 0.35 only about 7 in 10).
+const CONFIDENT = 0.5;
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
