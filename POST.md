@@ -23,15 +23,15 @@ There's no indoor mode. The app is useless until you step outside and bend down.
 
 **Live app:** https://ankan0503.github.io/hf26-week1/ (open it on your phone)
 
-![Kiska Kachra demo: snap, guess, correct, teach, offline, share](https://raw.githubusercontent.com/Ankan0503/hf26-week1/main-gqkng3/media/demo.gif)
+![Kiska Kachra demo: snap, guess, correct, teach, offline, share](https://raw.githubusercontent.com/Ankan0503/hf26-week1/main/media/demo.gif)
 
-Full-quality video: [media/demo.mp4](https://github.com/Ankan0503/hf26-week1/blob/main-gqkng3/media/demo.mp4)
+Full-quality video: [media/demo.mp4](https://github.com/Ankan0503/hf26-week1/blob/main/media/demo.mp4)
 
 The demo isn't staged by hand. GitHub Actions recorded it while driving the real app with the real model on a phone-sized screen: snap, guess, fix a wrong guess, teach it a new brand, switch to airplane mode, and share.
 
 ## Code
 
-**Repo:** https://github.com/Ankan0503/hf26-week1/tree/main-gqkng3
+{% github Ankan0503/hf26-week1 %}
 
 Plain HTML/CSS/JS, no build step, MIT licensed. The interesting files are `ai.js` (the recognizer), `data/labels.json` (brands and prompts), `tools/e2e.mjs` (real-model eval + the demo recording) and `.github/workflows/verify.yml`.
 
@@ -75,7 +75,7 @@ I built this from a cloud sandbox while away from my laptop, so the real test ha
 | `Xenova/clip-vit-base-patch16` | single | 31% | 45% | 811 | 87 MB |
 | `Xenova/clip-vit-base-patch32` | ensemble | 20% | 38% | 221 | 89 MB |
 
-Test set: 122 freely licensed photos across 41 brands; chance level is about 2%. It's small and noisy (Commons search results aren't all litter), so treat it as a smoke test, not a benchmark. Full per-photo results: [`eval/RESULTS.md`](https://github.com/Ankan0503/hf26-week1/blob/main-gqkng3/eval/RESULTS.md).
+Test set: 122 freely licensed photos across 41 brands; chance level is about 2%. It's small and noisy (Commons search results aren't all litter), so treat it as a smoke test, not a benchmark. Full per-photo results: [`eval/RESULTS.md`](https://github.com/Ankan0503/hf26-week1/blob/main/eval/RESULTS.md).
 
 ### What it can't do (yet)
 
