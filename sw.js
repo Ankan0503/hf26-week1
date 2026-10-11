@@ -1,7 +1,10 @@
-// Offline support: app shell + the Transformers.js / ONNX Runtime files from the CDN.
-// The model weights themselves are cached by Transformers.js (Cache API).
-const CACHE = 'kiska-kachra-v1';
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icon.svg'];
+// Offline support for the app shell and the vendored AI runtime.
+// Model weights are cached separately by Transformers.js (Cache API, "transformers-cache").
+const CACHE = 'kiska-kachra-v2';
+const SHELL = [
+  './', 'index.html', 'style.css', 'app.js', 'ai.js', 'data/labels.json', 'manifest.json', 'icon.svg',
+  'vendor/transformers.min.js', 'vendor/ort-wasm-simd-threaded.jsep.mjs', 'vendor/ort-wasm-simd-threaded.jsep.wasm',
+];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -10,30 +13,21 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('kiska-kachra-') && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
+// Same-origin GETs: network first (so updates land), cache when offline.
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  const sameOrigin = url.origin === location.origin;
-  const cdn = url.hostname === 'cdn.jsdelivr.net';
-  if (!sameOrigin && !cdn) return;
-
-  if (cdn) {
-    // Pinned versions never change: cache first.
-    e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
-      return res;
-    })));
-    return;
-  }
-  // App shell: network first so updates land, cache when offline.
-  e.respondWith(fetch(req).then((res) => {
-    if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
-    return res;
-  }).catch(() => caches.match(req, { ignoreSearch: true })));
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  e.respondWith(
+    fetch(req)
+      .then((res) => {
+        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
+        return res;
+      })
+      .catch(() => caches.match(req, { ignoreSearch: true }))
+  );
 });

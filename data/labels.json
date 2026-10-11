@@ -1,0 +1,37 @@
+{
+  "_comment": "Brands and item types the AI chooses between. Add a brand: add its name to `brands` and open a pull request. `prompts` are CLIP text templates; {} is replaced by the brand name and the embeddings of all templates are averaged.",
+  "brandPrompts": [
+    "a photo of a {} logo on litter",
+    "a crumpled {} wrapper",
+    "{} packaging thrown on the ground",
+    "a used {} bottle, can or packet"
+  ],
+  "noBrandPrompts": [
+    "a photo of plain litter with no logo",
+    "a dirty piece of trash with no visible brand",
+    "an unbranded plastic bag on the ground"
+  ],
+  "brands": [
+    "Lay's", "Kurkure", "Bingo", "Uncle Chipps", "Haldiram's", "Balaji", "Parle-G",
+    "Britannia", "Sunfeast", "Maggi", "Cadbury Dairy Milk", "KitKat", "Amul",
+    "Mother Dairy", "Coca-Cola", "Pepsi", "Thums Up", "Sprite", "Fanta", "Limca",
+    "Mountain Dew", "7Up", "Maaza", "Frooti", "Slice", "Bisleri", "Kinley",
+    "Aquafina", "Red Bull", "Sting", "Paper Boat", "Real", "Tropicana",
+    "Gold Flake", "Rajnigandha", "Vimal", "McDonald's", "Domino's",
+    "Swiggy", "Zomato", "Starbucks"
+  ],
+  "items": [
+    ["chips / snack packet", "a crumpled chips or snack packet"],
+    ["plastic bottle", "a plastic drink bottle"],
+    ["glass bottle", "a glass bottle"],
+    ["aluminium can", "an aluminium drink can"],
+    ["candy / biscuit wrapper", "a candy or biscuit wrapper"],
+    ["tetra pak / juice box", "a tetra pak juice box"],
+    ["disposable cup", "a disposable paper or plastic cup"],
+    ["plastic bag", "a plastic carry bag"],
+    ["food container", "a takeaway food container or box"],
+    ["cigarette pack / butt", "a cigarette pack or cigarette butt"],
+    ["gutka / pan masala sachet", "a small gutka or pan masala sachet"],
+    ["other", "a piece of trash"]
+  ]
+}

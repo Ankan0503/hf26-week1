@@ -1,49 +1,26 @@
 // Kiska Kachra: whose trash is this?
-// Zero-shot CLIP (Transformers.js) runs in the browser; nothing is uploaded.
+// UI + storage. The AI lives in ai.js and runs entirely in this browser.
 
-const TRANSFORMERS_URL = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2';
-const MODEL_ID = 'Xenova/clip-vit-base-patch32';
 const STORE_KEY = 'kiska-kachra-v1';
-
-// Brands commonly found as litter in India. Add yours with a pull request.
-const BRANDS = [
-  "Lay's", 'Kurkure', 'Bingo', 'Uncle Chipps', "Haldiram's", 'Balaji', 'Parle-G',
-  'Britannia', 'Sunfeast', 'Maggi', 'Cadbury Dairy Milk', 'KitKat', 'Amul',
-  'Mother Dairy', 'Coca-Cola', 'Pepsi', 'Thums Up', 'Sprite', 'Fanta', 'Limca',
-  'Mountain Dew', '7Up', 'Maaza', 'Frooti', 'Slice', 'Bisleri', 'Kinley',
-  'Aquafina', 'Red Bull', 'Sting', 'Paper Boat', 'Real', 'Tropicana',
-  'Gold Flake', 'Classic', 'Rajnigandha', 'Vimal', "McDonald's", "Domino's",
-  'Swiggy', 'Zomato', 'Starbucks', 'Chai Point'
-];
-const UNKNOWN = 'Unbranded / unreadable';
-
-const ITEMS = [
-  ['chips / snack packet', 'a crumpled chips or snack packet'],
-  ['plastic bottle', 'a plastic drink bottle'],
-  ['glass bottle', 'a glass bottle'],
-  ['aluminium can', 'an aluminium drink can'],
-  ['candy / biscuit wrapper', 'a candy or biscuit wrapper'],
-  ['tetra pak / juice box', 'a tetra pak juice box'],
-  ['paper / plastic cup', 'a disposable cup'],
-  ['plastic bag', 'a plastic carry bag'],
-  ['food container / box', 'a takeaway food container'],
-  ['cigarette pack / butt', 'a cigarette pack or cigarette butt'],
-  ['gutka / pan masala sachet', 'a small gutka or pan masala sachet'],
-  ['other', 'a piece of trash'],
-];
+// Below this probability the AI's top guess is not pre-selected; the user picks.
+const CONFIDENT = 0.35;
 
 const $ = (id) => document.getElementById(id);
-const mock = new URLSearchParams(location.search).has('mock');
+const params = new URLSearchParams(location.search);
+const mock = params.has('mock');
 
-let classifier = null;
-let current = null; // { brand, item }
+let labels, recognizer = null, NO_BRAND = 'Unbranded / unreadable';
+let current = null; // { brand, item, typed }
 
 // ---------- storage ----------
 function load() {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || { entries: [] }; }
-  catch { return { entries: [] }; }
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY));
+    if (s && Array.isArray(s.entries)) return { customBrands: [], ...s };
+  } catch {}
+  return { entries: [], customBrands: [] };
 }
-function save(state) {
+function save() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {}
 }
 let state = load();
@@ -53,47 +30,55 @@ function setStatus(text, pct) {
   $('model-status').textContent = text;
   if (pct != null) $('model-bar').style.width = Math.max(0, Math.min(100, pct)) + '%';
 }
+const mb = (b) => (b / 1e6).toFixed(0);
+
+function onProgress(p) {
+  if (p.phase === 'download') {
+    setStatus(`Downloading the open-weight AI model… ${mb(p.loaded)} / ${mb(p.total)} MB (one time only, use Wi-Fi)`,
+      (p.loaded / p.total) * 90);
+  } else if (p.phase === 'prompts') {
+    setStatus(`Teaching the AI ${labels.brands.length} brands… ${p.done}/${p.of}`, 90 + (p.done / p.of) * 10);
+  }
+}
+
+class MockRecognizer {
+  async init() {}
+  async addBrand() {}
+  async classify() {
+    const rank = (names) => names.map((name, i) => ({ name, score: i === 0 ? 0.62 : 0.38 / (names.length - 1) }));
+    return {
+      brands: rank([labels.brands[0], ...labels.brands.slice(1), NO_BRAND]),
+      items: rank(labels.items.map(([n]) => n)),
+      ms: 5,
+    };
+  }
+}
 
 async function loadModel() {
-  if (mock) {
-    classifier = async (_img, labels) =>
-      labels.map((label, i) => ({ label, score: i === 0 ? 0.6 : 0.4 / labels.length }));
-    return ready();
-  }
-  let mod;
+  setStatus('Loading the AI…', 2);
   try {
-    mod = await import(TRANSFORMERS_URL);
-  } catch (e) {
-    setStatus('Could not download the AI library. Check your internet and reload. (' + e.message + ')');
-    return;
-  }
-  const { pipeline, env } = mod;
-  env.allowLocalModels = false;
-  env.useBrowserCache = true;
-
-  const files = {};
-  const progress_callback = (p) => {
-    if (p.status === 'progress' && p.total) {
-      files[p.file] = [p.loaded, p.total];
-      let loaded = 0, total = 0;
-      for (const [l, t] of Object.values(files)) { loaded += l; total += t; }
-      setStatus(`Downloading the AI model… ${(loaded / 1e6).toFixed(0)} / ${(total / 1e6).toFixed(0)} MB (one time only)`,
-        (loaded / total) * 100);
-    } else if (p.status === 'ready') {
-      setStatus('Starting the AI…', 100);
+    if (mock) {
+      recognizer = new MockRecognizer();
+    } else {
+      const ai = await import('./ai.js');
+      NO_BRAND = ai.NO_BRAND;
+      recognizer = new ai.Recognizer({ labels, modelId: params.get('model') || ai.DEFAULT_MODEL, onProgress });
     }
-  };
-
-  try {
-    // Quantized (q8) on WASM: about 90 MB and runs on almost any phone. WebGPU is
-    // skipped on purpose: its fp32 weights are much larger and support is patchy.
-    classifier = await pipeline('zero-shot-image-classification', MODEL_ID, { progress_callback });
-    ready();
+    await recognizer.init(state.customBrands);
+    setStatus('✅ AI ready, running on your phone. Works offline from now on.', 100);
+    $('model-card').classList.add('ok');
+    setTimeout(() => { $('model-card').hidden = true; }, 2500);
   } catch (e) {
     console.error(e);
-    setStatus('The AI model failed to load: ' + e.message + '. Reload to retry. You can still log litter by hand below.');
-    enableSnap();
+    recognizer = null;
+    const offline = !navigator.onLine || /fetch|network/i.test(e.message);
+    setStatus(offline
+      ? 'No internet to download the AI model (needed only once). You can still log litter by hand; reload when you are online.'
+      : `The AI couldn't start (${e.message}). You can still log litter by hand. Reload to retry.`);
+    $('model-card').classList.add('err');
   }
+  enableSnap();
+  try { navigator.storage?.persist?.(); } catch {}
 }
 
 function enableSnap() {
@@ -102,59 +87,30 @@ function enableSnap() {
   $('photo').disabled = false;
 }
 
-function ready() {
-  setStatus('✅ AI ready, running on your phone. Works offline from now on.', 100);
-  enableSnap();
-  setTimeout(() => { $('model-card').hidden = true; }, 2500);
-}
-
-// Downscale the photo; CLIP only needs 224px, and phones produce 12 MP images.
-function toSmallDataURL(file) {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
+// Downscale the photo: CLIP looks at 224px; phone photos are 12 MP.
+async function shrink(file) {
+  const bmp = await createImageBitmap(file).catch(() => null);
+  const src = bmp || await new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => {
-      const s = 448 / Math.max(img.width, img.height);
-      const c = document.createElement('canvas');
-      c.width = Math.round(img.width * Math.min(1, s));
-      c.height = Math.round(img.height * Math.min(1, s));
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      URL.revokeObjectURL(url);
-      resolve(c.toDataURL('image/jpeg', 0.9));
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read that photo')); };
-    img.src = url;
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('could not read that photo'));
+    img.src = URL.createObjectURL(file);
   });
-}
-
-async function classify(dataURL) {
-  const brandPrompts = BRANDS.map((b) => `a photo of a ${b} logo on litter`);
-  brandPrompts.push('a photo of plain litter with no brand or logo');
-  const itemPrompts = ITEMS.map(([, p]) => `a photo of ${p}`);
-
-  const b = await classifier(dataURL, brandPrompts, { hypothesis_template: '{}' });
-  const i = await classifier(dataURL, itemPrompts, { hypothesis_template: '{}' });
-
-  const brandOf = (label) => {
-    const k = brandPrompts.indexOf(label);
-    return k < BRANDS.length ? BRANDS[k] : UNKNOWN;
-  };
-  const itemOf = (label) => ITEMS[itemPrompts.indexOf(label)][0];
-
-  return {
-    brands: b.sort((x, y) => y.score - x.score).slice(0, 4).map((r) => ({ name: brandOf(r.label), score: r.score })),
-    items: i.sort((x, y) => y.score - x.score).slice(0, 3).map((r) => ({ name: itemOf(r.label), score: r.score })),
-  };
+  const s = Math.min(1, 512 / Math.max(src.width, src.height));
+  const c = document.createElement('canvas');
+  c.width = Math.round(src.width * s);
+  c.height = Math.round(src.height * s);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', 0.9);
 }
 
 // ---------- UI ----------
-function chips(el, options, key) {
+function renderChips(el, options, key) {
   el.innerHTML = '';
   for (const o of options) {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'chip' + (current[key] === o.name ? ' on' : '');
-    btn.innerHTML = '';
     btn.append(o.name);
     if (o.score != null) {
       const s = document.createElement('small');
@@ -163,7 +119,7 @@ function chips(el, options, key) {
     }
     btn.onclick = () => {
       current[key] = o.name;
-      if (key === 'brand') $('brand-other').value = '';
+      if (key === 'brand') { current.typed = false; $('brand-other').value = ''; }
       for (const c of el.children) c.classList.toggle('on', c === btn);
     };
     el.append(btn);
@@ -176,66 +132,93 @@ $('photo').addEventListener('change', async (ev) => {
   if (!file) return;
   $('result').hidden = false;
   $('answer').hidden = true;
-  $('thinking').hidden = false;
   $('thinking').textContent = 'Looking at it…';
-  $('result').scrollIntoView({ behavior: 'smooth' });
+  $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  let guess;
+  let guess = null;
   try {
-    const dataURL = await toSmallDataURL(file);
+    const dataURL = await shrink(file);
     $('preview').src = dataURL;
-    if (classifier) {
-      const t0 = performance.now();
-      guess = await classify(dataURL);
-      $('thinking').textContent = `AI's guess (${((performance.now() - t0) / 1000).toFixed(1)}s). Tap to correct it, then log it.`;
-    }
+    if (recognizer) guess = await recognizer.classify(dataURL);
   } catch (e) {
     console.error(e);
-    $('thinking').textContent = 'The AI could not read this photo (' + e.message + '). Pick the brand by hand.';
-  }
-  if (!guess) {
-    guess = { brands: [], items: [] };
-    if (!classifier) $('thinking').textContent = 'AI not loaded. Pick the brand by hand.';
+    $('thinking').textContent = `The AI couldn't read this photo (${e.message}). Pick the brand yourself.`;
   }
 
-  current = { brand: guess.brands[0]?.name || null, item: guess.items[0]?.name || null };
-  const brandOpts = [...guess.brands];
-  if (!brandOpts.some((o) => o.name === UNKNOWN)) brandOpts.push({ name: UNKNOWN });
-  const itemOpts = [...guess.items];
-  for (const [name] of ITEMS) if (!itemOpts.some((o) => o.name === name)) itemOpts.push({ name });
+  const brands = guess ? guess.brands.slice(0, 4) : [];
+  const items = guess ? guess.items.slice(0, 3) : [];
+  const sure = brands[0] && brands[0].score >= CONFIDENT;
+  current = { brand: sure ? brands[0].name : null, item: items[0]?.name || null, typed: false };
 
-  chips($('brand-chips'), brandOpts, 'brand');
-  chips($('item-chips'), itemOpts, 'item');
+  if (guess) {
+    $('thinking').textContent = sure
+      ? `AI's guess in ${(guess.ms / 1000).toFixed(1)} s. Tap to correct it, then log it.`
+      : `The AI isn't sure (best guess ${Math.round(brands[0].score * 100)}%). Pick the brand, or type it.`;
+  } else if (!recognizer) {
+    $('thinking').textContent = 'AI not loaded. Pick the brand yourself.';
+  }
+
+  const brandOpts = [...brands];
+  if (!brandOpts.some((o) => o.name === NO_BRAND)) brandOpts.push({ name: NO_BRAND });
+  const itemOpts = [...items];
+  for (const [name] of labels.items) if (!itemOpts.some((o) => o.name === name)) itemOpts.push({ name });
+
+  renderChips($('brand-chips'), brandOpts, 'brand');
+  renderChips($('item-chips'), itemOpts, 'item');
   $('brand-other').value = '';
   $('answer').hidden = false;
 });
 
 $('brand-other').addEventListener('input', (e) => {
-  const v = e.target.value.trim();
-  if (v) {
-    current.brand = v;
-    for (const c of $('brand-chips').children) c.classList.remove('on');
-  }
+  const v = e.target.value.trim().replace(/\s+/g, ' ');
+  if (!v) return;
+  current.brand = v;
+  current.typed = true;
+  for (const c of $('brand-chips').children) c.classList.remove('on');
 });
 
-$('log-btn').addEventListener('click', () => {
-  if (!current?.brand) { alert('Pick a brand first, or choose "' + UNKNOWN + '".'); return; }
-  state.entries.push({ t: new Date().toISOString(), brand: current.brand, item: current.item || 'other' });
-  save(state);
+function knownBrand(name) {
+  const all = [...labels.brands, ...state.customBrands, NO_BRAND];
+  return all.find((b) => b.toLowerCase() === name.toLowerCase());
+}
+
+$('log-btn').addEventListener('click', async () => {
+  if (!current?.brand) { alert(`Pick a brand first, or choose "${NO_BRAND}".`); return; }
+  let brand = current.brand;
+  if (current.typed) {
+    const known = knownBrand(brand);
+    if (known) brand = known;
+    else {
+      state.customBrands.push(brand);
+      // Teach the AI the new brand so it can suggest it next time.
+      recognizer?.addBrand(brand).then(() => toast(`The AI now knows "${brand}" too.`)).catch(console.error);
+    }
+  }
+  state.entries.push({ t: new Date().toISOString(), brand, item: current.item || 'other' });
+  save();
   current = null;
   $('result').hidden = true;
   render();
+  toast(`Logged: ${brand}`);
   if (navigator.vibrate) navigator.vibrate(40);
 });
 
 $('skip-btn').addEventListener('click', () => { current = null; $('result').hidden = true; });
 
 $('reset-btn').addEventListener('click', () => {
-  if (state.entries.length && !confirm('Start a new walk? This clears today\'s tally (export the CSV first if you want it).')) return;
-  state = { entries: [] };
-  save(state);
+  if (state.entries.length && !confirm('Start a new walk? This clears the tally (export the CSV first if you want it).')) return;
+  state.entries = [];
+  save();
   render();
 });
+
+function toast(text) {
+  const el = $('toast');
+  el.textContent = text;
+  el.classList.add('show');
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => el.classList.remove('show'), 2200);
+}
 
 function tally() {
   const m = new Map();
@@ -248,38 +231,45 @@ function render() {
   const n = state.entries.length;
   $('total').textContent = n;
   $('empty').hidden = n > 0;
+  for (const id of ['share-btn', 'csv-btn', 'reset-btn']) $(id).disabled = n === 0;
   const max = rows[0]?.[1] || 1;
   $('board').innerHTML = '';
   for (const [brand, count] of rows) {
     const li = document.createElement('li');
     const name = document.createElement('span'); name.textContent = brand;
-    const c = document.createElement('strong'); c.textContent = count;
+    const c = document.createElement('strong'); c.textContent = `${count} · ${Math.round((count / n) * 100)}%`;
     const bar = document.createElement('div'); bar.className = 'b'; bar.style.width = (count / max) * 100 + '%';
     li.append(name, c, bar);
     $('board').append(li);
   }
   $('log').innerHTML = '';
-  for (const e of [...state.entries].reverse()) {
+  state.entries.forEach((e, idx) => {
     const li = document.createElement('li');
-    li.textContent = `${new Date(e.t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}: ${e.brand}, ${e.item}`;
-    $('log').append(li);
-  }
+    const txt = document.createElement('span');
+    txt.textContent = `${new Date(e.t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · ${e.brand} · ${e.item}`;
+    const del = document.createElement('button');
+    del.className = 'del';
+    del.setAttribute('aria-label', `Delete ${e.brand} entry`);
+    del.textContent = '✕';
+    del.onclick = () => { state.entries.splice(idx, 1); save(); render(); };
+    li.append(txt, del);
+    $('log').prepend(li);
+  });
 }
 
 function reportText() {
-  const rows = tally();
+  const rows = tally().filter(([b]) => b !== NO_BRAND);
   const n = state.entries.length;
-  const top = rows.filter(([b]) => b !== UNKNOWN).slice(0, 5).map(([b, c]) => `${b}: ${c}`).join('\n');
-  return `I picked up ${n} pieces of litter on my walk today. Whose trash was it?\n\n${top || '(no brands identified)'}\n\nBrands: your packaging is on our streets. #KiskaKachra #BreakFreeFromPlastic`;
+  const top = rows.slice(0, 5).map(([b, c], i) => `${i + 1}. ${b}: ${c}`).join('\n');
+  return `I picked up ${n} piece${n === 1 ? '' : 's'} of litter on my walk today. Whose trash was it?\n\n${top || '(no brands identified)'}\n\nCounted with Kiska Kachra, an on-device AI litter audit: ${location.origin}${location.pathname}\n#KiskaKachra #BrandAudit`;
 }
 
 $('share-btn').addEventListener('click', async () => {
-  if (!state.entries.length) { alert('Log some litter first!'); return; }
   const text = reportText();
   try {
     if (navigator.share) { await navigator.share({ text }); return; }
   } catch (e) { if (e.name === 'AbortError') return; }
-  try { await navigator.clipboard.writeText(text); alert('Report copied. Paste it anywhere.'); }
+  try { await navigator.clipboard.writeText(text); toast('Report copied. Paste it anywhere.'); }
   catch { prompt('Copy your report:', text); }
 });
 
@@ -290,11 +280,21 @@ $('csv-btn').addEventListener('click', () => {
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
   a.download = `kiska-kachra-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 
-render();
-loadModel();
+// ---------- boot ----------
+(async () => {
+  render();
+  try {
+    labels = await (await fetch('data/labels.json')).json();
+  } catch (e) {
+    setStatus(`Couldn't load the brand list (${e.message}). Reload to retry.`);
+    return;
+  }
+  loadModel();
+})();
 
 if ('serviceWorker' in navigator && !mock) {
-  navigator.serviceWorker.register('sw.js').catch((e) => console.warn('SW failed', e));
+  navigator.serviceWorker.register('sw.js').catch((e) => console.warn('Service worker failed', e));
 }

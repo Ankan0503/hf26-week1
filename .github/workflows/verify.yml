@@ -1,0 +1,53 @@
+name: verify-real-model
+
+# Runs the real open-weight model end to end (accuracy eval + recorded demo video)
+# and commits the results back to the branch.
+on:
+  push:
+    paths-ignore: ['media/**', 'eval/**', '**.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright + ffmpeg
+        run: |
+          npm i --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg >/dev/null
+      - name: Fetch test photos (Wikimedia Commons)
+        run: python3 tools/fetch_images.py "$RUNNER_TEMP/images" 3
+      - name: Eval + demo with the real model
+        run: |
+          python3 -m http.server 8000 >/dev/null 2>&1 &
+          sleep 1
+          node tools/e2e.mjs http://localhost:8000 "$RUNNER_TEMP/images" all
+      - name: Convert video
+        run: |
+          ffmpeg -y -loglevel error -i media/demo.webm -vf "fps=30,scale=780:-2" -c:v libx264 -pix_fmt yuv420p -movflags +faststart media/demo.mp4
+          rm media/demo.webm
+          ls -la media media/screens
+      - name: Check GitHub Pages
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://ankan0503.github.io/hf26-week1/ || true)
+          echo "Pages status: $code"
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eval media
+          git commit -m "CI: real-model eval results and demo video" || exit 0
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
